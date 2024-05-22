@@ -2,15 +2,15 @@
 
 Personal configuration files for tmux and nvim.
 
-## TMUX
+## tmux
 
 Configuration files for tmux can be found in the `tmux` folder.
 
-## NVIM
+## nvim
 
 Configuration files for nvim can be found in the `nvim` folder.
 
-### NVIM Installation
+### nvim installation
 
 Neovim can be installed as follows:
 
