@@ -25,6 +25,13 @@ return {
 			-- 	}
 			-- end,
 
+			formatters = {
+				yamlfix = {
+					command = "yamlfix",
+					prepend_args = { "--config-file", "yamlfix.toml" },
+				},
+			},
+
 			formatters_by_ft = {
 				lua = { "stylua" },
 				yaml = { "yamlfix" },
