@@ -29,8 +29,11 @@ return {
 				"yamlls",
 				"docker_compose_language_service",
 				"marksman",
+				"jdtls",
 
 				-- (2) DAP
+				"java-debug-adapter",
+				"java-test",
 
 				-- (3) Linter
 				"ansible-lint",

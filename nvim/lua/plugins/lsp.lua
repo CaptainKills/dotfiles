@@ -168,6 +168,11 @@ return {
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
+
+						if server_name == "jdtls" then
+							return
+						end
+
 						require("lspconfig")[server_name].setup({
 							cmd = server.cmd,
 							settings = server.settings,
