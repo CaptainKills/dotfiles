@@ -1,4 +1,4 @@
--- NOTE: [[ Vim Options ]]
+-- Vim Options
 vim.g.mapleader = " " -- Set <space> as the leader key
 vim.g.maplocalleader = " " -- Set <space> as the leader key
 vim.g.nerd_font = true -- Enable Nerd Font
@@ -26,3 +26,14 @@ vim.opt.softtabstop = 4
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
+-- Filetype Configuration
+vim.filetype.add({
+	extension = {},
+
+	filename = {
+		["docker-compose.yml"] = "yaml.docker-compose",
+		["docker-compose.yaml"] = "yaml.docker-compose",
+	},
+
+	pattern = {},
+})
