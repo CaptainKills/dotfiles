@@ -22,7 +22,10 @@ return {
 		vim.keymap.set("n", "<F3>", dap.step_over, { desc = "DAP: Step Over" })
 		vim.keymap.set("n", "<F4>", dap.step_out, { desc = "DAP: Step Out" })
 		vim.keymap.set("n", "<F5>", dap.step_back, { desc = "DAP Step Back" })
-		vim.keymap.set("n", "<F12>", dap.restart, { desc = "DAP: Restart Debugger" })
+		vim.keymap.set("n", "<F6>", dap.restart, { desc = "DAP: Restart Debugger" })
+		vim.keymap.set("n", "<F9>", dapui.open, { desc = "DAP: Open UI" })
+		vim.keymap.set("n", "<F10>", dapui.close, { desc = "DAP: Close UI" })
+
 		vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
 		vim.keymap.set("n", "<leader>?", function()
 			dapui.eval(nil, { enter = true })
@@ -42,7 +45,7 @@ return {
 			-- dapui.close()
 		end
 		dap.listeners.before.event_exited.dapui_config = function()
-		-- 	dapui.close()
+			-- 	dapui.close()
 		end
 
 		dap.configurations.java = {
