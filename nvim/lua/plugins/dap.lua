@@ -4,9 +4,6 @@ return {
 		"rcarriga/nvim-dap-ui",
 		"theHamsta/nvim-dap-virtual-text",
 		"nvim-neotest/nvim-nio",
-		-- "williamboman/mason.nvim",
-		-- "WhoIsSethDaniel/mason-tool-installer.nvim",
-		-- "jay-babu/mason-nvim-dap.nvim",
 	},
 
 	opts = {},
