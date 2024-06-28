@@ -16,12 +16,6 @@ return {
 				"vim",
 				"vimdoc",
 				"query",
-
-				-- Additional Parses:
-				"yaml",
-				"java",
-				"kotlin",
-				"bash",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)

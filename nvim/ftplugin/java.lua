@@ -1,6 +1,6 @@
 local jdtls = require("jdtls")
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-local workspace_dir = vim.env.HOME .. "/jdtls-workspace/" .. project_name
+local workspace_dir = vim.env.HOME .. "/.jdtls-workspace/" .. project_name
 
 -- Needed for debugging
 local bundles = {
