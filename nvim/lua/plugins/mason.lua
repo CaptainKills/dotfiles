@@ -44,6 +44,10 @@ return {
 				"yamlfix",
 				"mdformat",
 			},
+
+			auto_update = true,
+			run_on_start = true,
+			start_delay = 3000,
 		},
 	},
 }
