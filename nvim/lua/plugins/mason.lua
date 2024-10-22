@@ -43,6 +43,7 @@ return {
 				"stylua",
 				"yamlfix",
 				"mdformat",
+				"clang-format",
 			},
 
 			auto_update = true,

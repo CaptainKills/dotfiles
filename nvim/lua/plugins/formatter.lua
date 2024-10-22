@@ -29,12 +29,17 @@ return {
 					command = "yamlfix",
 					prepend_args = { "--config-file", "yamlfix.toml" },
 				},
+				["clang-format"] = {
+					command = "clang-format",
+					prepend_args = { "--style=file" },
+				},
 			},
 
 			formatters_by_ft = {
 				lua = { "stylua" },
 				yaml = { "yamlfix" },
 				markdown = { "mdformat" },
+				json = { "clang-format" },
 			},
 		},
 	},
