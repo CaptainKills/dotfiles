@@ -39,6 +39,8 @@ return {
 				lua = { "stylua" },
 				yaml = { "yamlfix" },
 				markdown = { "mdformat" },
+				java = { "clang-format" },
+				c = { "clang-format" },
 				json = { "clang-format" },
 			},
 		},
