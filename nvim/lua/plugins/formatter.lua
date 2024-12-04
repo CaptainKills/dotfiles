@@ -33,6 +33,10 @@ return {
 					command = "clang-format",
 					prepend_args = { "--style=file" },
 				},
+				black = {
+					command = "black",
+					prepend_args = { "--config", "pyproject.toml" },
+				},
 			},
 
 			formatters_by_ft = {
@@ -43,6 +47,7 @@ return {
 				java = { "clang-format" },
 				c = { "clang-format" },
 				json = { "clang-format" },
+				python = { "black" },
 			},
 		},
 	},

@@ -160,7 +160,23 @@ return {
 
 				docker_compose_language_service = {},
 
-				marksman = {},
+				pyright = {
+					cmd = { "pyright-langserver", "--stdio" },
+					filetype = { "python" },
+					-- capabilities = {},
+					settings = {
+						python = {
+							analysis = {
+								autoSearchPaths = true,
+								diagnosticMode = "openFilesOnly",
+								useLibraryCodeForTypes = true,
+								autoImportCompletions = true,
+								typeCheckingMode = "standard",
+							},
+							pythonPath = "python3",
+						},
+					},
+				},
 			}
 
 			-- NOTE: LSP Setup

@@ -28,8 +28,8 @@ return {
 				"ansiblels",
 				"yamlls",
 				"docker_compose_language_service",
-				"marksman",
 				"jdtls",
+				"pyright",
 
 				-- (2) DAP
 				"java-debug-adapter",
@@ -37,14 +37,15 @@ return {
 
 				-- (3) Linter
 				"ansible-lint",
-				"yamllint",
+				"mypy",
+				"ruff",
 
 				-- (4) Formatter
 				"stylua",
-				-- "yamlfix",
 				"yamlfmt",
 				"mdformat",
 				"clang-format",
+				"black",
 			},
 
 			auto_update = true,
