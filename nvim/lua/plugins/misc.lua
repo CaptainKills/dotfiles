@@ -39,6 +39,12 @@ return {
 		config = function() end,
 	},
 
+	-- NOTE: Java Language Server
+	{
+		"mfussenegger/nvim-jdtls",
+		ft = "java",
+	},
+
 	-- NOTE: Closing Brackets Automatically
 	{
 		"rstacruz/vim-closer",
