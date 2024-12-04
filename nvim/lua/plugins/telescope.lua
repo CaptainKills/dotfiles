@@ -20,7 +20,7 @@ return {
 		require("telescope").setup({
 			pickers = {
 				find_files = {
-					follow = false,
+					follow = true,
 				},
 			},
 			extensions = {
