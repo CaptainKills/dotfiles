@@ -41,7 +41,8 @@ return {
 
 				-- (4) Formatter
 				"stylua",
-				"yamlfix",
+				-- "yamlfix",
+				"yamlfmt",
 				"mdformat",
 				"clang-format",
 			},

@@ -15,7 +15,7 @@ return {
 		},
 
 		opts = {
-			notify_on_error = false,
+			notify_on_error = true,
 
 			format_on_save = function(bufnr)
 				return {
@@ -25,9 +25,9 @@ return {
 			end,
 
 			formatters = {
-				yamlfix = {
-					command = "yamlfix",
-					prepend_args = { "--config-file", "yamlfix.toml" },
+				yamlfmt = {
+					command = "yamlfmt",
+					prepend_args = { "-conf", "yamlfmt.yml" },
 				},
 				["clang-format"] = {
 					command = "clang-format",
@@ -37,7 +37,8 @@ return {
 
 			formatters_by_ft = {
 				lua = { "stylua" },
-				yaml = { "yamlfix" },
+				yaml = { "yamlfmt" },
+				["yaml.ansible"] = { "yamlfmt" },
 				markdown = { "mdformat" },
 				java = { "clang-format" },
 				c = { "clang-format" },
