@@ -30,10 +30,12 @@ return {
 				"docker_compose_language_service",
 				"jdtls",
 				"pyright",
+				"clangd",
 
 				-- (2) DAP
 				"java-debug-adapter",
 				"java-test",
+				"codelldb",
 
 				-- (3) Linter
 				"ansible-lint",

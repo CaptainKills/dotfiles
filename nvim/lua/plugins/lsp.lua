@@ -177,6 +177,12 @@ return {
 						},
 					},
 				},
+
+				clangd = {
+					cmd = { "clangd" },
+					-- capabilities = {},
+					settings = {},
+				},
 			}
 
 			-- NOTE: LSP Setup
