@@ -28,7 +28,12 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Filetype Configuration
 vim.filetype.add({
-	extension = {},
+	extension = {
+		h = "c",
+		c = "c",
+		hpp = "cpp",
+		cpp = "cpp",
+	},
 
 	filename = {
 		["docker-compose.yml"] = "yaml.docker-compose",

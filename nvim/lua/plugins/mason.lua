@@ -22,34 +22,7 @@ return {
 		dependencies = { "williamboman/mason.nvim" },
 
 		opts = {
-			ensure_installed = {
-				-- (1) LSP
-				"lua_ls",
-				"ansiblels",
-				"yamlls",
-				"docker_compose_language_service",
-				"jdtls",
-				"pyright",
-				"clangd",
-
-				-- (2) DAP
-				"java-debug-adapter",
-				"java-test",
-				"codelldb",
-
-				-- (3) Linter
-				"ansible-lint",
-				"mypy",
-				"ruff",
-
-				-- (4) Formatter
-				"stylua",
-				"yamlfmt",
-				"mdformat",
-				"clang-format",
-				"black",
-			},
-
+			ensure_installed = require("core.config").mason.ensure_installed,
 			auto_update = true,
 			run_on_start = true,
 			start_delay = 3000,

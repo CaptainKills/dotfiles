@@ -1,5 +1,6 @@
 return {
 	"mfussenegger/nvim-dap",
+	ft = require("core.config").dap.ft,
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
 		"theHamsta/nvim-dap-virtual-text",
@@ -45,35 +46,8 @@ return {
 			-- 	dapui.close()
 		end
 
-		-- NOTE: DAP Adapter Configuration
-		dap.adapters.codelldb = {
-			type = "server",
-			host = "127.0.0.1",
-			port = "3000",
-			executable = {
-				command = "codelldb",
-				args = { "--port", "3000" },
-			},
-		}
-
-		-- NOTE: DAP Filetype Configuration
-		dap.configurations.java = {
-			{
-				name = "Debug Application",
-				type = "java",
-				request = "launch",
-			},
-		}
-
-		dap.configurations.c = {
-			{
-				name = "Debug Application",
-				type = "codelldb",
-				request = "launch",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
-			},
-		}
+		-- NOTE: DAP Configuration
+		dap.adapters = require("core.config").dap.adapters
+		dap.configurations = require("core.config").dap.configurations
 	end,
 }

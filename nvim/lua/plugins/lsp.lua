@@ -2,6 +2,7 @@ return {
 	-- NOTE: Neovim Language Server Protocol
 	{
 		"neovim/nvim-lspconfig",
+		ft = require("core.config").lsp.ft,
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -87,109 +88,11 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-			-- NOTE: LSP Configuration
-			-- Enable the following language servers
-			local servers = {
-				lua_ls = {
-					-- cmd = {},
-					filetype = { "lua" },
-					-- capabilities = {},
-					settings = {
-						Lua = {
-							runtime = { version = "LuaJIT" },
-							workspace = {
-								checkThirdParty = false,
-								library = {
-									"${3rd}/luv/library",
-									unpack(vim.api.nvim_get_runtime_file("", true)),
-								},
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-							hint = {
-								enable = true,
-							},
-						},
-					},
-				},
-
-				ansiblels = {
-					-- cmd = {},
-					filetype = { "yaml.ansible" },
-					-- capabilities = {},
-					settings = {
-						ansible = {
-							ansible = {
-								path = "ansible",
-							},
-							executionEnvironment = {
-								enabled = false,
-							},
-							python = {
-								path = "python3",
-							},
-							validation = {
-								enabled = true,
-								lint = {
-									enabled = true,
-									path = "ansible-lint",
-								},
-							},
-						},
-					},
-				},
-
-				yamlls = {
-					-- cmd = {},
-					filetype = { "yaml", "yaml.docker-compose" },
-					-- capabilities = {},
-					settings = {
-						yaml = {
-							format = {
-								enable = true,
-							},
-							validate = true,
-							hover = true,
-							schemas = {
-								["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-							},
-						},
-					},
-				},
-
-				docker_compose_language_service = {},
-
-				pyright = {
-					cmd = { "pyright-langserver", "--stdio" },
-					filetype = { "python" },
-					-- capabilities = {},
-					settings = {
-						python = {
-							analysis = {
-								autoSearchPaths = true,
-								diagnosticMode = "openFilesOnly",
-								useLibraryCodeForTypes = true,
-								autoImportCompletions = true,
-								typeCheckingMode = "standard",
-							},
-							pythonPath = "python3",
-						},
-					},
-				},
-
-				clangd = {
-					cmd = { "clangd" },
-					-- capabilities = {},
-					settings = {},
-				},
-			}
-
 			-- NOTE: LSP Setup
 			require("mason-lspconfig").setup({
 				handlers = {
 					function(server_name)
-						local server = servers[server_name] or {}
+						local server = require("core.config").lsp.configurations[server_name] or {}
 
 						if server_name == "jdtls" then
 							return
@@ -202,10 +105,13 @@ return {
 							flags = server.flags,
 							root_dir = server.root_dir,
 							capabilities = server.capabilities,
+							---@diagnostic disable-next-line: undefined-global
 							on_attach = on_attach,
 						})
 					end,
 				},
+				ensure_installed = {},
+				automatic_installation = false,
 			})
 		end,
 	},

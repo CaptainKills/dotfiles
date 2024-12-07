@@ -2,6 +2,7 @@ return {
 	-- NOTE: Neovim Linter
 	{
 		"mfussenegger/nvim-lint",
+		ft = require("core.config").linter.ft,
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -13,9 +14,7 @@ return {
 		config = function()
 			local lint = require("lint")
 
-			lint.linters_by_ft = {
-				python = { "mypy", "ruff" },
-			}
+			lint.linters_by_ft = require("core.config").linter.linter_by_ft
 
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 				callback = function()

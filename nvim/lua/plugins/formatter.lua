@@ -2,6 +2,7 @@ return {
 	-- NOTE: Code Autoformatter
 	{
 		"stevearc/conform.nvim",
+		ft = require("core.config").formatter.ft,
 
 		keys = {
 			{
@@ -24,31 +25,8 @@ return {
 				}
 			end,
 
-			formatters = {
-				yamlfmt = {
-					command = "yamlfmt",
-					prepend_args = { "-conf", "yamlfmt.yml" },
-				},
-				["clang-format"] = {
-					command = "clang-format",
-					prepend_args = { "--style=file" },
-				},
-				black = {
-					command = "black",
-					prepend_args = { "--config", "pyproject.toml" },
-				},
-			},
-
-			formatters_by_ft = {
-				lua = { "stylua" },
-				yaml = { "yamlfmt" },
-				["yaml.ansible"] = { "yamlfmt" },
-				markdown = { "mdformat" },
-				java = { "clang-format" },
-				c = { "clang-format" },
-				json = { "clang-format" },
-				python = { "black" },
-			},
+			formatters = require("core.config").formatter.formatters,
+			formatters_by_ft = require("core.config").formatter.formatters_by_ft,
 		},
 	},
 }
