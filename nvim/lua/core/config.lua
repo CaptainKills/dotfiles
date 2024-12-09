@@ -97,7 +97,7 @@ M.linter = {
 	},
 }
 
--- NOTE : LSP Configuration
+-- NOTE: LSP Configuration
 M.lsp = {
 	-- The filetype(s) for which this plugin is enabled.
 	ft = {
@@ -188,7 +188,7 @@ M.lsp = {
 	},
 }
 
--- NOTE : Mason Configuration
+-- NOTE: Mason Configuration
 M.mason = {
 	-- The filetype(s) for which this plugin is enabled.
 	-- ft = {},
