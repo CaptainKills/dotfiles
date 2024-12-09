@@ -26,6 +26,13 @@ vim.opt.softtabstop = 4
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
+-- Setup code folding
+vim.opt.fillchars = [[fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+
 -- Filetype Configuration
 vim.filetype.add({
 	extension = {
