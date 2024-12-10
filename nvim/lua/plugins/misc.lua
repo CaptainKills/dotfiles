@@ -45,6 +45,12 @@ return {
 		ft = "java",
 	},
 
+	-- NOTE: Go Debug Adapter
+	{
+		"leoluz/nvim-dap-go",
+		ft = "go",
+	},
+
 	-- NOTE: Closing Brackets Automatically
 	{
 		"rstacruz/vim-closer",

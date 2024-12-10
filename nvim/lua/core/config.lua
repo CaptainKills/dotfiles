@@ -3,7 +3,11 @@ local M = {}
 -- NOTE: DAP Configuration
 M.dap = {
 	-- The filetype(s) for which this plugin is enabled.
-	ft = { "c", "java" },
+	ft = {
+		"c",
+		"java",
+		"go",
+	},
 
 	-- DAP Adapter Configurations
 	adapters = {
@@ -48,6 +52,7 @@ M.formatter = {
 		"lua",
 		"java",
 		"c",
+		"go",
 		"python",
 		"yaml",
 		"yaml.ansible",
@@ -67,6 +72,21 @@ M.formatter = {
 			prepend_args = { "--style=file" },
 		},
 
+		gofumpt = {
+			command = "gofumpt",
+			prepend_args = {},
+		},
+
+		["goimports-reviser"] = {
+			command = "goimports-reviser",
+			prepend_args = { "-rm-unused" },
+		},
+
+		golines = {
+			command = "golines",
+			prepend_args = { "-m", "120" },
+		},
+
 		black = {
 			command = "black",
 			prepend_args = { "--config", "pyproject.toml" },
@@ -78,6 +98,7 @@ M.formatter = {
 		lua = { "stylua" },
 		java = { "clang-format" },
 		c = { "clang-format" },
+		go = { "gofumpt", "goimports-reviser", "golines" },
 		python = { "black" },
 		yaml = { "yamlfmt" },
 		["yaml.ansible"] = { "yamlfmt" },
@@ -89,7 +110,9 @@ M.formatter = {
 -- NOTE: Linter Configuration
 M.linter = {
 	-- The filetype(s) for which this plugin is enabled.
-	ft = { "python" },
+	ft = {
+		"python",
+	},
 
 	-- Linter Filetype Configurations
 	linter_by_ft = {
@@ -104,6 +127,8 @@ M.lsp = {
 		"lua",
 		"java",
 		"c",
+		"go",
+		"gomod",
 		"python",
 		"yaml.ansible",
 		"yaml.docker-compose",
@@ -137,6 +162,16 @@ M.lsp = {
 		clangd = {
 			cmd = { "clangd" },
 			filetype = { "c", "cpp" },
+		},
+
+		gopls = {
+			cmd = { "gopls" },
+			filetype = { "go", "gomod", "gowork", "gotmpl" },
+			settings = {
+				gopls = {
+					gofumpt = true,
+				},
+			},
 		},
 
 		pyright = {
@@ -208,6 +243,12 @@ M.mason = {
 		"clangd", -- LSP
 		"codelldb", -- DAP
 		"clang-format", -- Formatter
+
+		-- Go
+		"gopls", -- LSP
+		"gofumpt", -- Formatter
+		"goimports-reviser", -- Formatter
+		"delve", -- DAP
 
 		-- Python
 		"pyright", -- LSP
