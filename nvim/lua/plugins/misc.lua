@@ -50,16 +50,4 @@ return {
 		"leoluz/nvim-dap-go",
 		ft = "go",
 	},
-
-	-- NOTE: Closing Brackets Automatically
-	{
-		"rstacruz/vim-closer",
-		config = function() end,
-	},
-
-	-- NOTE: Closing Structures Automatically
-	{
-		"tpope/vim-endwise",
-		config = function() end,
-	},
 }

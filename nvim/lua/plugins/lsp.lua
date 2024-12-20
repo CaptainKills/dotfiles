@@ -2,13 +2,13 @@ return {
 	-- NOTE: Neovim Language Server Protocol
 	{
 		"neovim/nvim-lspconfig",
-		ft = require("core.config").lsp.ft,
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{ "j-hui/fidget.nvim", opts = {} },
 			{ "folke/neodev.nvim", opts = {} },
+			"saghen/blink.cmp",
 		},
 
 		opts = {},
@@ -84,10 +84,6 @@ return {
 				end,
 			})
 
-			-- Create new capabilities with nvim cmp, and then broadcast that to the servers.
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
 			-- NOTE: LSP Setup
 			require("mason-lspconfig").setup({
 				handlers = {
@@ -97,6 +93,11 @@ return {
 						if server_name == "jdtls" then
 							return
 						end
+
+						-- Create new capabilities with autocomplete, and then broadcast that to the servers.
+						local capabilities = vim.lsp.protocol.make_client_capabilities()
+						server.capabilities =
+							vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
 
 						require("lspconfig")[server_name].setup({
 							cmd = server.cmd,
