@@ -2,7 +2,6 @@ return {
 	-- NOTE: Neovim Linter
 	{
 		"mfussenegger/nvim-lint",
-		ft = require("core.config").linter.ft,
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",

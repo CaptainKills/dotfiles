@@ -3,11 +3,7 @@ local M = {}
 -- NOTE: DAP Configuration
 M.dap = {
 	-- The filetype(s) for which this plugin is enabled.
-	ft = {
-		"c",
-		"java",
-		"go",
-	},
+	-- ft = {},
 
 	-- DAP Adapter Configurations
 	adapters = {
@@ -48,17 +44,7 @@ M.dap = {
 -- NOTE: Formatter Configuration
 M.formatter = {
 	-- The filetype(s) for which this plugin is enabled.
-	ft = {
-		"lua",
-		"java",
-		"c",
-		"go",
-		"python",
-		"yaml",
-		"yaml.ansible",
-		"markdown",
-		"json",
-	},
+	ft = {},
 
 	-- Formatter Configurations
 	formatters = {
@@ -74,12 +60,12 @@ M.formatter = {
 
 		gofumpt = {
 			command = "gofumpt",
-			prepend_args = {},
+			-- prepend_args = {},
 		},
 
 		["goimports-reviser"] = {
 			command = "goimports-reviser",
-			prepend_args = { "-rm-unused" },
+			-- prepend_args = { "-rm-unused" },
 		},
 
 		golines = {
@@ -110,9 +96,7 @@ M.formatter = {
 -- NOTE: Linter Configuration
 M.linter = {
 	-- The filetype(s) for which this plugin is enabled.
-	ft = {
-		"python",
-	},
+	-- ft = {},
 
 	-- Linter Filetype Configurations
 	linter_by_ft = {
@@ -123,16 +107,7 @@ M.linter = {
 -- NOTE: LSP Configuration
 M.lsp = {
 	-- The filetype(s) for which this plugin is enabled.
-	ft = {
-		"lua",
-		"java",
-		"c",
-		"go",
-		"gomod",
-		"python",
-		"yaml.ansible",
-		"yaml.docker-compose",
-	},
+	-- ft = {},
 
 	-- LSP Configurations
 	configurations = {

@@ -2,7 +2,6 @@ return {
 	-- NOTE: Code Autoformatter
 	{
 		"stevearc/conform.nvim",
-		ft = require("core.config").formatter.ft,
 
 		keys = {
 			{
@@ -16,7 +15,7 @@ return {
 		},
 
 		opts = {
-			notify_on_error = true,
+			notify_on_error = false,
 
 			format_on_save = function(bufnr)
 				return {

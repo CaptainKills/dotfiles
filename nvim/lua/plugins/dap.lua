@@ -1,6 +1,5 @@
 return {
 	"mfussenegger/nvim-dap",
-	ft = require("core.config").dap.ft,
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
 		"theHamsta/nvim-dap-virtual-text",
