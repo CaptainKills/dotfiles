@@ -3,9 +3,9 @@ return {
 	{
 		"mfussenegger/nvim-lint",
 		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"williamboman/mason-tool-installer.nvim",
+			"mason-org/mason.nvim",
+			"mason-org/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 
 		opts = {},

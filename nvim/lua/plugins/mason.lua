@@ -1,7 +1,7 @@
 return {
 	-- NOTE: Mason Package Manager
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 
 		config = function()
 			require("mason").setup({
@@ -19,7 +19,7 @@ return {
 	-- NOTE: Mason Installer
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		dependencies = { "williamboman/mason.nvim" },
+		dependencies = { "mason-org/mason.nvim" },
 
 		opts = {
 			ensure_installed = require("core.config").mason.ensure_installed,
