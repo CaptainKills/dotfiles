@@ -135,7 +135,7 @@ M.lsp = {
 		},
 
 		clangd = {
-			cmd = { "clangd" },
+			cmd = { "clangd", "--clang-tidy", "--completion-style=detailed", "--header-insertion=iwyu", "--pretty" },
 			filetype = { "c", "cpp" },
 		},
 
