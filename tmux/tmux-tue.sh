@@ -1,7 +1,8 @@
 #!/bin/bash
 
 SESSION="tue"
-WORKING_DIRECTORY="/home/danick/sshfs/tue/group-20/project-2-sequential"
+WORKING_DIRECTORY="/home/danick/sshfs/tue"
+NVIM_DIRECTORY="/home/danick/sshfs/tue/group-20/project-3-data-parallel/"
 
 SSH_URL="student@es-pynq059.ics.ele.tue.nl"
 SSH_DIRECTORY="/home/student/"
@@ -23,7 +24,7 @@ tmux new-session -d -s $SESSION
 
 # Create Nvim Window
 tmux rename-window -t $SESSION:1 "nvim"
-tmux send-keys -t $SESSION:1 "cd $WORKING_DIRECTORY; clear" C-m
+tmux send-keys -t $SESSION:1 "cd $NVIM_DIRECTORY; clear" C-m
 tmux send-keys -t $SESSION:1 "nvim" C-m
 
 # Create SSH Window
