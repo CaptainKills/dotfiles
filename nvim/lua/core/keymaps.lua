@@ -20,6 +20,9 @@ vim.keymap.set("n", "<C-t>c", ":tabclose<CR>")
 vim.keymap.set("n", "<C-t>n", ":tabn<CR>")
 vim.keymap.set("n", "<C-t>p", ":tabp<CR>")
 
+-- Buffer Management
+vim.keymap.set("n", "<leader>db", ":bdelete<CR>", { desc = "[D]elete [B]uffer" })
+
 -- Movement Management
 vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
