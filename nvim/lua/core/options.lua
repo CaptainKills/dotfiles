@@ -32,6 +32,7 @@ vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
+vim.opt.viewoptions = "folds"
 
 -- Filetype Configuration
 vim.filetype.add({
