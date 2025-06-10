@@ -32,6 +32,7 @@ return {
 			-- NOTE: File Explorer Keymaps
 			vim.keymap.set("n", "<leader>to", ":NvimTreeOpen<CR>", { desc = "[T]oggle Filetree [O]pen" })
 			vim.keymap.set("n", "<leader>tc", ":NvimTreeClose<CR>", { desc = "[T]oggle Filetree [C]losed" })
+			vim.keymap.set("n", "<leader>tr", ":NvimTreeRefresh<CR>", { desc = "File[T]ree [R]efresh" })
 		end,
 	},
 }
