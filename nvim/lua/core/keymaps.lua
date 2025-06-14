@@ -15,6 +15,7 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Tab Management
+vim.keymap.set("n", "<Tab>", ":bnext<CR>", { desc = "Cycle through open buffers" })
 vim.keymap.set("n", "<C-t>o", ":tabnew<CR>")
 vim.keymap.set("n", "<C-t>c", ":tabclose<CR>")
 vim.keymap.set("n", "<C-t>n", ":tabn<CR>")
