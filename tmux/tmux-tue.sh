@@ -2,7 +2,7 @@
 
 SESSION="tue"
 WORKING_DIRECTORY="/home/danick/sshfs/tue"
-NVIM_DIRECTORY="/home/danick/sshfs/tue/group-20/project-3-data-parallel/"
+NVIM_DIRECTORY="/home/danick/sshfs/tue/"
 
 SSH_URL="student@es-pynq059.ics.ele.tue.nl"
 SSH_DIRECTORY="/home/student/"
