@@ -1,12 +1,14 @@
 # Dotfiles
+Personal configuration files for anything Terminal related :).
 
-Personal configuration files for tmux and nvim.
-
-## tmux
-
-Configuration files for tmux can be found in the `tmux` folder.
+## bash
+Configuration files for bash can be found in the  `bash` folder.
 
 ## nvim
+Configuration files for nvim can be found in the  `nvim` folder.
 
-Configuration files for nvim can be found in the `nvim` folder.
+## tmux
+Configuration files for tmux can be found in the  `tmux` folder.
 
+## wsl
+Configuration files for wsl can be found in the  `wsl` folder.
