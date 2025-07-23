@@ -16,6 +16,7 @@ vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor
 vim.opt.signcolumn = "yes" -- Keep git signcolumn on by default
 vim.opt.laststatus = 3 -- Global statusline
+vim.opt.winborder = "rounded" -- Set default window border
 
 -- Set width of tabs
 vim.opt.tabstop = 4

@@ -33,6 +33,30 @@ return {
 		opts = {},
 	},
 
+	-- NOTE: Language Server Protocol Diagnostics
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+
+		opts = {
+			preset = "classic",
+
+			signs = {},
+			blend = {
+				factor = 0.1,
+			},
+
+			options = {
+				overflow = {
+					padding = 5,
+				},
+			},
+		},
+
+		config = function(_, opts)
+			require("tiny-inline-diagnostic").setup(opts)
+		end,
+	},
+
 	-- NOTE: Ansible Neovim
 	{
 		"mfussenegger/nvim-ansible",

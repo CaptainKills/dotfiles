@@ -106,96 +106,12 @@ M.linter = {
 
 -- NOTE: LSP Configuration
 M.lsp = {
-	-- The filetype(s) for which this plugin is enabled.
-	-- ft = {},
-
-	-- LSP Configurations
-	configurations = {
-		lua_ls = {
-			cmd = { "lua-language-server" },
-			filetype = { "lua" },
-			settings = {
-				Lua = {
-					runtime = { version = "LuaJIT" },
-					workspace = {
-						checkThirdParty = false,
-						library = {
-							"${3rd}/luv/library",
-							unpack(vim.api.nvim_get_runtime_file("", true)),
-						},
-					},
-					completion = {
-						callSnippet = "Replace",
-					},
-					hint = {
-						enable = true,
-					},
-				},
-			},
-		},
-
-		clangd = {
-			cmd = { "clangd", "--clang-tidy", "--completion-style=detailed", "--header-insertion=iwyu", "--pretty" },
-			filetype = { "c", "cpp" },
-		},
-
-		gopls = {
-			cmd = { "gopls" },
-			filetype = { "go", "gomod", "gowork", "gotmpl" },
-			settings = {
-				gopls = {
-					gofumpt = true,
-				},
-			},
-		},
-
-		pyright = {
-			cmd = { "pyright-langserver", "--stdio" },
-			filetype = { "python" },
-			settings = {
-				python = {
-					analysis = {
-						autoSearchPaths = true,
-						diagnosticMode = "openFilesOnly",
-						useLibraryCodeForTypes = true,
-						autoImportCompletions = true,
-						typeCheckingMode = "standard",
-					},
-					pythonPath = "python3",
-				},
-			},
-		},
-
-		ansiblels = {
-			cmd = { "ansible-language-server", "--stdio" },
-			filetype = { "yaml.ansible" },
-			settings = {
-				ansible = {
-					ansible = {
-						path = "ansible",
-					},
-					executionEnvironment = {
-						enabled = false,
-					},
-					python = {
-						path = "python3",
-					},
-					validation = {
-						enabled = true,
-						lint = {
-							enabled = true,
-							path = "ansible-lint",
-						},
-					},
-				},
-			},
-		},
-
-		docker_compose_language_service = {
-			cmd = { "docker-compose-langserver", "--stdio" },
-			filetype = { "yaml.docker-compose" },
-		},
-	},
+	"lua_ls",
+	"clangd",
+	"gopls",
+	"pyright",
+	"ansiblels",
+	"docker_ls",
 }
 
 -- NOTE: Mason Configuration
@@ -206,7 +122,7 @@ M.mason = {
 	-- Ensure the following packages are installed.
 	ensure_installed = {
 		-- Lua
-		"lua_ls", -- LSP
+		"lua-language-server", -- LSP
 		"stylua", -- Formatter
 
 		-- Java
@@ -232,12 +148,12 @@ M.mason = {
 		"black", -- Formatter
 
 		-- Ansible
-		"ansiblels", -- LSP
+		"ansible-language-server", -- LSP
 		"ansible-lint", -- Linter
 		"yamlfmt", -- Formatter
 
 		-- Docker Compose
-		"docker_compose_language_service", -- LSP
+		"docker-compose-language-service", -- LSP
 
 		-- Markdown
 		"mdformat", -- Formatter
