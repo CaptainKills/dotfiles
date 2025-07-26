@@ -1,7 +1,7 @@
 -- NOTE: Enable LSP Servers
 vim.lsp.enable(require("core.config").lsp)
 
--- NOTE: LSP Attach
+-- NOTE: LSP Attach & Detach
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
 		local map = function(keys, func, desc)
@@ -53,7 +53,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- NOTE: LSP Detach
 vim.api.nvim_create_autocmd("LspDetach", {
 	group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
 	callback = function(event)
@@ -65,3 +64,40 @@ vim.api.nvim_create_autocmd("LspDetach", {
 		end
 	end,
 })
+
+-- NOTE: LSP User Commands
+vim.api.nvim_create_user_command("LspInfo", ":checkhealth vim.lsp", { desc = "Alias to `:checkhealth vim.lsp`" })
+
+vim.api.nvim_create_user_command("LspLog", function()
+	vim.cmd(string.format("tabnew %s", vim.lsp.get_log_path()))
+end, { desc = "Opens the Nvim LSP Client log" })
+
+vim.api.nvim_create_user_command("LspRestart", function(info)
+	local clients = info.fargs
+
+	-- Default to restarting all active servers
+	if #clients == 0 then
+		clients = vim.iter(vim.lsp.get_clients())
+			:map(function(client)
+				return client.name
+			end)
+			:totable()
+	end
+
+	for _, name in ipairs(clients) do
+		if vim.lsp.config[name] == nil then
+			vim.notify(("Invalid server name '%s'"):format(name))
+		else
+			vim.lsp.enable(name, false)
+		end
+	end
+
+	local timer = assert(vim.uv.new_timer())
+	timer:start(500, 0, function()
+		for _, name in ipairs(clients) do
+			vim.schedule_wrap(function(x)
+				vim.lsp.enable(x)
+			end)(name)
+		end
+	end)
+end, { desc = "Restart the given Nvim LSP Client" })
