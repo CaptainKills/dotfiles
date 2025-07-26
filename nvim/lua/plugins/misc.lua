@@ -57,6 +57,11 @@ return {
 		end,
 	},
 
+	{
+		"j-hui/fidget.nvim",
+		opts = {},
+	},
+
 	-- NOTE: Ansible Neovim
 	{
 		"mfussenegger/nvim-ansible",
