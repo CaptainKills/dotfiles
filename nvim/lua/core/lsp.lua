@@ -100,4 +100,4 @@ vim.api.nvim_create_user_command("LspRestart", function(info)
 			end)(name)
 		end
 	end)
-end, { desc = "Restart the given Nvim LSP Client" })
+end, { desc = "Restart the given Nvim LSP Client", nargs = "?" })

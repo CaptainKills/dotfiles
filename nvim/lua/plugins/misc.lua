@@ -57,6 +57,7 @@ return {
 		end,
 	},
 
+	-- NOTE: Language Server Protocol Notifications
 	{
 		"j-hui/fidget.nvim",
 		opts = {},
@@ -66,17 +67,5 @@ return {
 	{
 		"mfussenegger/nvim-ansible",
 		config = function() end,
-	},
-
-	-- NOTE: Java Language Server
-	{
-		"mfussenegger/nvim-jdtls",
-		ft = "java",
-	},
-
-	-- NOTE: Go Debug Adapter
-	{
-		"leoluz/nvim-dap-go",
-		ft = "go",
 	},
 }
