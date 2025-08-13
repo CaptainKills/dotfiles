@@ -6,7 +6,7 @@ return {
 		require("tokyonight").setup({
 			on_colors = function(colors)
 				colors.border = colors.fg_dark
-			end
+			end,
 		})
 		vim.cmd.colorscheme("tokyonight-night")
 	end,
