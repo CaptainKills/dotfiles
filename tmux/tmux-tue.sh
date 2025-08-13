@@ -20,11 +20,10 @@ if ! mountpoint -q $WORKING_DIRECTORY; then
 fi
 
 # Create Session
-tmux new-session -d -s $SESSION
+tmux new-session -d -s $SESSION -c $WORKING_DIRECTORY
 
 # Create Nvim Window
 tmux rename-window -t $SESSION:1 "nvim"
-tmux send-keys -t $SESSION:1 "cd $NVIM_DIRECTORY; clear" C-m
 tmux send-keys -t $SESSION:1 "nvim" C-m
 
 # Create SSH Window
