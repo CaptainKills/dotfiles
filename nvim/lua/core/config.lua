@@ -28,6 +28,10 @@ M.mason = {
 
 		-- Docker Compose
 		"docker-compose-language-service", -- LSP
+
+		-- Typst
+		"tinymist", -- LSP
+		"typstyle", -- Formatter
 	},
 }
 
@@ -50,6 +54,9 @@ M.lsp = {
 
 	-- Docker Compose
 	"docker_ls",
+
+	-- Typst
+	"tinymist",
 }
 
 -- NOTE: Formatter Configuration
@@ -83,6 +90,8 @@ M.formatter = {
 		yaml = { "yamlfmt" },
 		["yaml.ansible"] = { "yamlfmt" },
 		["yaml.docker-compose"] = { "yamlfmt" },
+
+		typst = { "typstyle" },
 	},
 }
 
