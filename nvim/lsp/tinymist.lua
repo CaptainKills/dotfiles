@@ -81,7 +81,7 @@ return {
 
 	settings = {
 		formatterMode = "typstyle",
-		exportPdf = "onSave",
+		exportPdf = "never",
 
 		lint = {
 			enabled = true,
