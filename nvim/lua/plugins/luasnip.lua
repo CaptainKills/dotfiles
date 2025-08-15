@@ -32,6 +32,8 @@ return {
 					ls.change_choice(1)
 				end
 			end, { desc = "Snippets: Change active choice" })
+
+			vim.keymap.set("n", "<leader>x", loader.lazy_load, { desc = "LuaSnip: reload snippets" })
 		end,
 	},
 }
