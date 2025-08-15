@@ -10,6 +10,7 @@ return {
 				preset = "default",
 				["<C-p>"] = { "select_prev", "snippet_backward", "fallback_to_mappings" },
 				["<C-n>"] = { "select_next", "snippet_forward", "fallback_to_mappings" },
+				["<C-space>"] = { "show", "hide" },
 			},
 
 			appearance = {
