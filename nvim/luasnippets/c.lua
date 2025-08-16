@@ -27,36 +27,32 @@ end
 
 -- INFO: Snippets: C
 return {
+	-- stylua: ignore start
+
 	-- Header File Template
-	s(
-		"header",
-		fmt(
-			[[
-		#ifndef __{}_H
-		#define __{}_H
+	s("header",	fmt(
+		[[
+			#ifndef __{}_H
+			#define __{}_H
 
-		{}
+			{}
 
-		#endif // __{}_H
-		]],
-			{ d(1, get_file_name), rep(1), i(0), rep(1) }
-		)
+			#endif // __{}_H
+		]],	{ d(1, get_file_name), rep(1), i(0), rep(1) })
 	),
 
 	-- Main File Template
-	s(
-		"main",
-		fmt(
-			[[
-		#include <stdio.h>
-		#include <stdlib.h>
+	s("main", fmt(
+		[[
+			#include <stdio.h>
+			#include <stdlib.h>
 
-		int main({}) {{
-			{}
-			return 0;
-		}}
-		]],
-			{ c(1, { t("void"), t("int argc, char* argv[]") }), i(0) }
-		)
+			int main({}) {{
+				{}
+				return 0;
+			}}
+		]], { c(1, { t("void"), t("int argc, char* argv[]") }), i(0) })
 	),
+
+	-- stylua: ignore end
 }

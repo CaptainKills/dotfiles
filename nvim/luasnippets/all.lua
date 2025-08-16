@@ -15,4 +15,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 
 -- INFO: Snippets: All
-return {}
+return {
+	-- stylua: ignore start
+	-- stylua: ignore end
+}

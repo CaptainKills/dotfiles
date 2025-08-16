@@ -20,27 +20,23 @@ local placement = function()
 end
 
 return {
+	-- stylua: ignore start
+
 	-- Figure Template
-	s(
-		"fig",
-		fmt(
-			[[
+	s("fig", fmt(
+		[[
 			#figure(
 				image("{}"),
 				placement: {},
 				caption: [{}],
 			) <fig:{}>
 			{}
-		]],
-			{ i(1), d(2, placement), i(3), i(4), i(0) }
-		)
+		]], { i(1), d(2, placement), i(3), i(4), i(0) })
 	),
 
 	-- Table Template
-	s(
-		"tab",
-		fmt(
-			[[
+	s("tab", fmt(
+		[[
 			#figure(
 				placement: {},
 				caption: [{}],
@@ -53,8 +49,21 @@ return {
 				)
 			) <tab:{}>
 			{}
-		]],
-			{ d(1, placement), i(2), i(3, "2"), i(5), i(6), i(4), i(0) }
-		)
+		]], { d(1, placement), i(2), i(3, "2"), i(5), i(6), i(4), i(0) })
 	),
+
+	-- Equation Template
+	s("eq", fmt(
+		[[
+			$ {} $ <eq:{}>
+			{}
+		]], { i(1), i(2), i(0) })
+	),
+
+	-- Inline Math Template
+	s({ trig = "$", snippetType = "autosnippet" }, {
+		t("$"), i(1), t("$"), i(0),
+	}),
+
+	--stylua: ignore end
 }
