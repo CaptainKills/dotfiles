@@ -11,6 +11,8 @@ return {
 			update_events = "TextChanged,TextChangedI",
 			delete_check_events = "TextChanged",
 
+			enable_autosnippets = true,
+
 			ext_opts = {
 				[require("luasnip.util.types").choiceNode] = {
 					active = {
@@ -33,7 +35,7 @@ return {
 				end
 			end, { desc = "Snippets: Change active choice" })
 
-			vim.keymap.set("n", "<leader>x", loader.lazy_load, { desc = "LuaSnip: reload snippets" })
+			vim.keymap.set("n", "<leader>x", loader.lazy_load, { desc = "Snippets: reload snippets" })
 		end,
 	},
 }
