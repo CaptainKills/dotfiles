@@ -32,6 +32,7 @@ M.mason = {
 		-- Typst
 		"tinymist", -- LSP
 		"typstyle", -- Formatter
+		"ltex-ls-plus", -- Spellchecker
 	},
 }
 
@@ -57,6 +58,7 @@ M.lsp = {
 
 	-- Typst
 	"tinymist",
+	"ltex_plus",
 }
 
 -- NOTE: Formatter Configuration
