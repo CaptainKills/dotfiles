@@ -60,7 +60,11 @@ return {
 	-- NOTE: Language Server Protocol Notifications
 	{
 		"j-hui/fidget.nvim",
-		opts = {},
+		opts = {
+			progress = {
+				suppress_on_insert = true,
+			},
+		},
 	},
 
 	-- NOTE: Ansible Neovim
