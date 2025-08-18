@@ -26,12 +26,12 @@ return {
 	s("fig", fmt(
 		[[
 			#figure(
-				image("{}"),
+				image("{}", width: {}%),
 				placement: {},
 				caption: [{}],
 			) <fig:{}>
 			{}
-		]], { i(1), d(2, placement), i(3), i(4), i(0) })
+		]], { i(1), i(2, "100"), d(3, placement), i(4), i(5), i(0) })
 	),
 
 	-- Table Template
@@ -63,6 +63,16 @@ return {
 	-- Inline Math Template
 	s({ trig = "$", snippetType = "autosnippet" }, {
 		t("$"), i(1), t("$"), i(0),
+	}),
+
+	-- Expend _ to _()
+	s({ trig = "_", snippetType = "autosnippet", wordTrig = false }, {
+		t("_("), i(0), t(")"),
+	}),
+
+	-- Expand ^ to ^()
+	s({ trig = "^", snippetType = "autosnippet", wordTrig = false }, {
+		t("^("), i(0), t(")"),
 	}),
 
 	--stylua: ignore end
