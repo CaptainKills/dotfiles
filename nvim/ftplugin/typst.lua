@@ -5,6 +5,9 @@ vim.cmd([[
 	setlocal linebreak
 ]])
 
+-- Format Paragraph Keymap
+vim.keymap.set("n", "gq", "vipgq", { desc = "Format paragraph according to formatoptions" })
+
 -- LSP: General Keymaps
 vim.keymap.set("n", "<leader>li", ":LspTinymistGetServerInfo<CR>", { desc = "Typst: Get LSP Info" })
 vim.keymap.set("n", "<leader>ld", ":LspTinymistGetDocumentMetrics<CR>", { desc = "Typst: Get Document Metrics" })
