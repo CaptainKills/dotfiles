@@ -21,7 +21,7 @@ return {
 	settings = {
 		ltex = {
 			language = "en-GB",
-			checkFrequency = "save",
+			checkFrequency = "edit",
 
 			disabledRules = {
 				["en-GB"] = { "OXFORD_SPELLING_Z_NOT_S" },
