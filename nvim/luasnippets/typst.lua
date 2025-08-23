@@ -23,7 +23,6 @@ local math_mode = function()
 	local ts = require("nvim-treesitter.ts_utils")
 	local node = ts.get_node_at_cursor()
 
-	print("Node: ", node, ", Type: ", node:type(), ", Parent: ", node:parent())
 	if node:type() == "math" then
 		return true
 	end
@@ -84,12 +83,12 @@ return {
 		t("$"), i(1), t("$"), i(0),
 	}),
 
-	-- Expend _ to _()
+	-- Expand _ to _() in Math Mode
 	s({ trig = "_", snippetType = "autosnippet", wordTrig = false, condition = math_mode }, {
 		t("_("), i(0), t(")"),
 	}),
 
-	-- Expand ^ to ^()
+	-- Expand ^ to ^() in Math Mode
 	s({ trig = "^", snippetType = "autosnippet", wordTrig = false, condition = math_mode }, {
 		t("^("), i(0), t(")"),
 	}),
