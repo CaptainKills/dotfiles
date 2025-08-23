@@ -11,11 +11,13 @@ M.mason = {
 		-- C
 		"clangd", -- LSP
 		"clang-format", -- Formatter
+		"codelldb", -- DAP
 
 		-- Go
 		"gopls", -- LSP
 		"gofumpt", -- Formatter
 		"goimports-reviser", -- Formatter
+		"delve", -- DAP
 
 		-- Python
 		"pyright", -- LSP
