@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SESSION="typst"
-WORKING_DIRECTORY="/home/danick/typst"
+WORKING_DIRECTORY="/home/danick/typst/$1"
 
 # Check if Session is Running
 if tmux has-session -t $SESSION 2> /dev/null; then
