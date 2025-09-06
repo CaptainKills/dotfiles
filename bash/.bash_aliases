@@ -17,4 +17,5 @@ alias tmux-web="bash /home/danick/.config/tmux/tmux-web.sh"
 alias tmux-tue="bash /home/danick/.config/tmux/tmux-tue.sh"
 alias tmux-go="bash /home/danick/.config/tmux/tmux-go.sh"
 alias tmux-typst="bash /home/danick/.config/tmux/tmux-typst.sh"
+alias tmux-python="bash /home/danick/.config/tmux/tmux-python.sh"
 
