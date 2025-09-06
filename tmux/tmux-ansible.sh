@@ -20,6 +20,9 @@ tmux send-keys -t $SESSION:1 "nvim" C-m
 tmux new-window -t $SESSION:2 -c $WORKING_DIRECTORY
 tmux rename-window -t $SESSION:2 "terminal"
 
+# Enable Virtual Environment
+tmux send-keys -t $SESSION:2 "source .venv/bin/activate && clear" C-m
+
 # Attach Session
 tmux select-window -t $SESSION:1
 tmux attach-session -t $SESSION
