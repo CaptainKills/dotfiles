@@ -14,6 +14,9 @@ tmux new-session -d -s $SESSION -c $WORKING_DIRECTORY
 
 # Create Nvim Window
 tmux rename-window -t $SESSION:1 "nvim"
+if [ ! -v $1 ]; then
+	tmux send-keys -t $SESSION:1 "source .venv/bin/activate && clear" C-m
+fi
 tmux send-keys -t $SESSION:1 "nvim" C-m
 
 # Create Terminal Window
