@@ -1,14 +1,14 @@
 #!/bin/bash
 
 SESSION="web"
-WORKING_DIRECTORY="/home/danick/sshfs/web"
+WORKING_DIRECTORY="/home/danick/sshfs/web/"
 
 SSH_URL="danick@web.danick.triantis.nl"
 SSH_DIRECTORY="/home/danick/docker"
 SSH_KEY="/home/danick/.ssh/id_web"
 
 # Check if Session is Running
-if tmux has-session -t $SESSION 2> /dev/null; then
+if tmux has-session -t $SESSION 2>/dev/null; then
 	tmux attach-session -t $SESSION
 	exit 0
 fi

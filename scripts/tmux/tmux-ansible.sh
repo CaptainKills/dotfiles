@@ -1,10 +1,10 @@
 #!/bin/bash
 
 SESSION="ansible"
-WORKING_DIRECTORY="/home/danick/ansible"
+WORKING_DIRECTORY="/home/danick/ansible/"
 
 # Check if Session is Running
-if tmux has-session -t $SESSION 2> /dev/null; then
+if tmux has-session -t $SESSION 2>/dev/null; then
 	tmux attach-session -t $SESSION
 	exit 0
 fi

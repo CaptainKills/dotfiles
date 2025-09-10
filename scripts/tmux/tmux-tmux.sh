@@ -1,10 +1,10 @@
 #!/bin/bash
 
 SESSION="tmux"
-WORKING_DIRECTORY="/home/danick/.config/tmux"
+WORKING_DIRECTORY="/home/danick/.config/tmux/"
 
 # Check if Session is Running
-if tmux has-session -t $SESSION 2> /dev/null; then
+if tmux has-session -t $SESSION 2>/dev/null; then
 	tmux attach-session -t $SESSION
 	exit 0
 fi

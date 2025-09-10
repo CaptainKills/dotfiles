@@ -1,12 +1,22 @@
 #!/bin/bash
 
-SESSION="typst"
-WORKING_DIRECTORY="/home/danick/typst/$1"
+SESSION="go"
+WORKING_DIRECTORY="/home/danick/go/"
 
 # Check if Session is Running
-if tmux has-session -t $SESSION 2> /dev/null; then
+if tmux has-session -t $SESSION 2>/dev/null; then
 	tmux attach-session -t $SESSION
 	exit 0
+fi
+
+# Fuzzy Pick Subdirectory
+selected=$(find $WORKING_DIRECTORY -maxdepth 1 -type d | fzf -q "$WORKING_DIRECTORY" --bind 'q:abort')
+fzf_status=$?
+
+if [[ $fzf_status -ne 0 || -z "$selected" ]]; then
+	WORKING_DIRECTORY="$WORKING_DIRECTORY"
+else
+	WORKING_DIRECTORY="$selected"
 fi
 
 # Create Session
