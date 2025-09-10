@@ -8,6 +8,10 @@ M.mason = {
 		"lua-language-server", -- LSP
 		"stylua", -- Formatter
 
+		-- Bash
+		"bash-language-server", -- LSP
+		"shfmt", -- Formatter
+
 		-- C
 		"clangd", -- LSP
 		"clang-format", -- Formatter
@@ -42,6 +46,9 @@ M.mason = {
 M.lsp = {
 	-- Lua
 	"lua_ls",
+
+	-- Bash
+	"bashls",
 
 	-- C
 	"clangd",
@@ -83,6 +90,8 @@ M.formatter = {
 	-- Formatter Filetype Configurations
 	formatters_by_ft = {
 		lua = { "stylua" },
+
+		sh = { "shfmt" },
 
 		c = { "clang-format" },
 		json = { "clang-format" },
