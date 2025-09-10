@@ -9,13 +9,15 @@ alias sshfs-web="sshfs danick@web.danick.triantis.nl:/home/danick/docker /home/d
 alias sshfs-tue="sshfs student@es-pynq059.ics.ele.tue.nl:/home/student /home/danick/sshfs/tue -o IdentityFile=~/.ssh/id_pynq" # 5LIB0
 
 # TMUX Session Scripts
-alias tmux-nvim="bash /home/danick/.config/tmux/tmux-nvim.sh"
-alias tmux-tmux="bash /home/danick/.config/tmux/tmux-tmux.sh"
-alias tmux-ansible="bash /home/danick/.config/tmux/tmux-ansible.sh"
-alias tmux-docker="bash /home/danick/.config/tmux/tmux-docker.sh"
-alias tmux-web="bash /home/danick/.config/tmux/tmux-web.sh"
-alias tmux-tue="bash /home/danick/.config/tmux/tmux-tue.sh"
-alias tmux-go="bash /home/danick/.config/tmux/tmux-go.sh"
-alias tmux-typst="bash /home/danick/.config/tmux/tmux-typst.sh"
-alias tmux-python="bash /home/danick/.config/tmux/tmux-python.sh"
+SCRIPTS_DIR=/home/danick/dotfiles/scripts
+
+alias tmux-nvim="bash $SCRIPTS_DIR/tmux-nvim.sh"
+alias tmux-tmux="bash $SCRIPTS_DIR/tmux-tmux.sh"
+alias tmux-ansible="bash $SCRIPTS_DIR/tmux-ansible.sh"
+alias tmux-docker="bash $SCRIPTS_DIR/tmux-docker.sh"
+alias tmux-web="bash $SCRIPTS_DIR/tmux-web.sh"
+alias tmux-tue="bash $SCRIPTS_DIR/tmux-tue.sh"
+alias tmux-go="bash $SCRIPTS_DIR/tmux-go.sh"
+alias tmux-typst="bash $SCRIPTS_DIR/tmux-typst.sh"
+alias tmux-python="bash $SCRIPTS_DIR/tmux-python.sh"
 
