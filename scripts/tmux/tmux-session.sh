@@ -33,13 +33,13 @@ fi
 case $selected in
 # Dotfiles
 "bash")
-	# source $SCRIPTS_DIR/tmux-bash.sh
+	source $SCRIPTS_DIR/tmux-bash.sh
 	;;
 "nvim")
 	source $SCRIPTS_DIR/tmux-nvim.sh
 	;;
 "scripts")
-	# source $SCRIPTS_DIR/tmux-scripts.sh
+	source $SCRIPTS_DIR/tmux-scripts.sh
 	;;
 "tmux")
 	source $SCRIPTS_DIR/tmux-tmux.sh
