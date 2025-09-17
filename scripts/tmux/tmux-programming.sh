@@ -10,7 +10,7 @@ if tmux has-session -t $SESSION 2>/dev/null; then
 fi
 
 # Fuzzy Pick Subdirectory
-selected=$(find $WORKING_DIRECTORY -mindepth 1 -maxdepth 1 -type d | fzf --tmux 40% -q "$WORKING_DIRECTORY" --bind 'q:abort')
+selected=$(find $WORKING_DIRECTORY -maxdepth 1 -type d | fzf --tmux 40% -q "$WORKING_DIRECTORY" --bind 'q:abort')
 fzf_status=$?
 
 if [[ $fzf_status -ne 0 || -z "$selected" ]]; then
@@ -24,7 +24,7 @@ tmux new-session -d -s $SESSION -c $WORKING_DIRECTORY
 
 # Create Nvim Window
 tmux rename-window -t $SESSION:1 "nvim"
-if [ "$lang" = "python" ]; then
+if [ "$1" = "python" ] || [ "$1" = "ansible" ]; then
 	tmux send-keys -t $SESSION:1 "source .venv/bin/activate && clear" C-m
 fi
 tmux send-keys -t $SESSION:1 "nvim" C-m
@@ -34,7 +34,7 @@ tmux new-window -t $SESSION:2 -c $WORKING_DIRECTORY
 tmux rename-window -t $SESSION:2 "terminal"
 
 # (Python) Enable Virtual Environment
-if [ "$lang" = "python" ]; then
+if [ "$1" = "python" ] || [ "$1" = "ansible" ]; then
 	tmux send-keys -t $SESSION:2 "source .venv/bin/activate && clear" C-m
 fi
 

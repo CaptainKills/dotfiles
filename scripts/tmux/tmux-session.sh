@@ -7,14 +7,12 @@ CATEGORIES=(
 	"scripts"
 	"tmux"
 
-	# Applications
-	"ansible"
-
 	# Programming
 	"c"
 	"go"
 	"python"
 	"typst"
+	"ansible"
 
 	# Remotes
 	"docker"
@@ -46,11 +44,6 @@ case $selected in
 	source $SCRIPTS_DIR/tmux-dotfiles.sh "tmux"
 	;;
 
-# Applications
-"ansible")
-	source $SCRIPTS_DIR/tmux-ansible.sh
-	;;
-
 # Programming
 "c")
 	source $SCRIPTS_DIR/tmux-programming.sh "c"
@@ -63,6 +56,9 @@ case $selected in
 	;;
 "typst")
 	source $SCRIPTS_DIR/tmux-programming.sh "typst"
+	;;
+"ansible")
+	source $SCRIPTS_DIR/tmux-programming.sh "ansible"
 	;;
 
 # Remotes
