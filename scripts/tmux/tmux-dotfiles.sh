@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SESSION="nvim"
-WORKING_DIRECTORY="/home/danick/.config/nvim/"
+SESSION="$1"
+WORKING_DIRECTORY="/home/danick/dotfiles/$1/"
 
 # Check if Session is Running
 if tmux has-session -t $SESSION 2>/dev/null; then
@@ -14,7 +14,11 @@ tmux new-session -d -s $SESSION -c $WORKING_DIRECTORY
 
 # Create Nvim Window
 tmux rename-window -t $SESSION:1 "nvim"
-tmux send-keys -t $SESSION:1 "nvim" C-m
+if [ "$1" = "tmux" ]; then
+	tmux send-keys -t $SESSION:1 "nvim tmux.conf" C-m
+else
+	tmux send-keys -t $SESSION:1 "nvim" C-m
+fi
 
 # Create Terminal Window
 tmux new-window -t $SESSION:2 -c $WORKING_DIRECTORY

@@ -11,6 +11,7 @@ CATEGORIES=(
 	"ansible"
 
 	# Programming
+	"c"
 	"go"
 	"python"
 	"typst"
@@ -33,16 +34,16 @@ fi
 case $selected in
 # Dotfiles
 "bash")
-	source $SCRIPTS_DIR/tmux-bash.sh
+	source $SCRIPTS_DIR/tmux-dotfiles.sh "bash"
 	;;
 "nvim")
-	source $SCRIPTS_DIR/tmux-nvim.sh
+	source $SCRIPTS_DIR/tmux-dotfiles.sh "nvim"
 	;;
 "scripts")
-	source $SCRIPTS_DIR/tmux-scripts.sh
+	source $SCRIPTS_DIR/tmux-dotfiles.sh "scripts"
 	;;
 "tmux")
-	source $SCRIPTS_DIR/tmux-tmux.sh
+	source $SCRIPTS_DIR/tmux-dotfiles.sh "tmux"
 	;;
 
 # Applications
@@ -51,14 +52,17 @@ case $selected in
 	;;
 
 # Programming
+"c")
+	source $SCRIPTS_DIR/tmux-programming.sh "c"
+	;;
 "go")
-	source $SCRIPTS_DIR/tmux-go.sh
+	source $SCRIPTS_DIR/tmux-programming.sh "go"
 	;;
 "python")
-	source $SCRIPTS_DIR/tmux-python.sh
+	source $SCRIPTS_DIR/tmux-programming.sh "python"
 	;;
 "typst")
-	source $SCRIPTS_DIR/tmux-typst.sh
+	source $SCRIPTS_DIR/tmux-programming.sh "typst"
 	;;
 
 # Remotes
