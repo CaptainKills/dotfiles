@@ -67,13 +67,13 @@ case $selected in
 
 # Remotes
 "docker")
-	source $SCRIPTS_DIR/tmux-docker.sh
+	source $SCRIPTS_DIR/tmux-remote.sh "docker" "/home/danick/docker/"
 	;;
 "web")
-	source $SCRIPTS_DIR/tmux-web.sh
+	source $SCRIPTS_DIR/tmux-remote.sh "web" "/home/danick/docker/"
 	;;
 "tue")
-	source $SCRIPTS_DIR/tmux-tue.sh
+	source $SCRIPTS_DIR/tmux-remote.sh "tue" "/home/student/"
 	;;
 
 # Default

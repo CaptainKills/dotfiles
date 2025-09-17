@@ -1,11 +1,10 @@
 #!/bin/bash
 
-SESSION="docker"
-WORKING_DIRECTORY="/home/danick/sshfs/docker/"
+SESSION="$1"
+WORKING_DIRECTORY="/home/danick/sshfs/$1/"
 
-SSH_URL="danick@docker.danick.triantis.nl"
-SSH_DIRECTORY="/home/danick/docker"
-SSH_KEY="/home/danick/.ssh/id_docker"
+SSH_HOST="$1"
+SSH_DIRECTORY="$2"
 
 # Check if Session is Running
 if tmux has-session -t $SESSION 2>/dev/null; then
@@ -15,7 +14,7 @@ fi
 
 # Check if SSH-FS is Running
 if ! mountpoint -q $WORKING_DIRECTORY; then
-	sshfs $SSH_URL:$SSH_DIRECTORY $WORKING_DIRECTORY -o IdentityFile=$SSH_KEY
+	sshfs $SSH_HOST:$SSH_DIRECTORY $WORKING_DIRECTORY
 fi
 
 # Create Session
@@ -28,7 +27,7 @@ tmux send-keys -t $SESSION:1 "nvim" C-m
 # Create SSH Window
 tmux new-window -t $SESSION:2
 tmux rename-window -t $SESSION:2 "ssh"
-tmux send-keys -t $SESSION:2 "ssh $SESSION" C-m
+tmux send-keys -t $SESSION:2 "ssh $SSH_HOST" C-m
 tmux send-keys -t $SESSION:2 "cd $SSH_DIRECTORY; clear" C-m
 
 # Attach Session
