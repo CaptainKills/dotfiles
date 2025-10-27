@@ -7,6 +7,7 @@ vim.g.loaded_netrwplugin = 1
 vim.g.clipboard = "xclip" -- Set xclip as clipboard provider
 
 vim.opt.number = true -- Enable line numbers
+vim.opt.relativenumber = true -- Enable relative line numbers
 vim.opt.mouse = "a" -- Enable mouse mode
 vim.opt.showmode = false -- Show the mode
 vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim
