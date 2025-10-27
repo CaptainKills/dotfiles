@@ -31,10 +31,8 @@ vim.keymap.set("n", "<C-t>p", ":tabp<CR>")
 vim.keymap.set("n", "<leader>db", ":bdelete<CR>", { desc = "[D]elete [B]uffer" })
 
 -- Movement Management
-vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Center buffer on Ctrl+d" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Center buffer on Ctrl+u" })
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
