@@ -22,7 +22,7 @@ CATEGORIES=(
 
 SCRIPTS_DIR=/home/danick/dotfiles/scripts/tmux
 
-selected=$(printf "%s\n" "${CATEGORIES[@]}" | fzf --tmux 40% --bind 'q:abort')
+selected=$(printf "%s\n" "${CATEGORIES[@]}" | fzf --layout=reverse --height 40% --tmux 40% --bind 'q:abort')
 fzf_status=$?
 
 if [[ $fzf_status -ne 0 || -z "$selected" ]]; then
