@@ -15,8 +15,8 @@ CATEGORIES=(
 	"ansible"
 
 	# Remotes
-	"docker"
-	"web"
+	"docker-proxmox"
+	"docker-web"
 	"tue"
 )
 
@@ -62,11 +62,11 @@ case $selected in
 	;;
 
 # Remotes
-"docker")
-	source $SCRIPTS_DIR/tmux-remote.sh "docker" "/home/danick/docker/"
+"docker-proxmox")
+	source $SCRIPTS_DIR/tmux-remote.sh "docker-proxmox" "/home/danick/docker/"
 	;;
-"web")
-	source $SCRIPTS_DIR/tmux-remote.sh "web" "/home/danick/docker/"
+"docker-web")
+	source $SCRIPTS_DIR/tmux-remote.sh "docker-web" "/home/danick/docker/"
 	;;
 "tue")
 	source $SCRIPTS_DIR/tmux-remote.sh "tue" "/home/student/"
