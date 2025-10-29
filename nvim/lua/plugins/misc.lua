@@ -23,7 +23,32 @@ return {
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },
 			},
+			current_line_blame_opts = {
+				delay = 0,
+			},
 		},
+
+		config = function(_, opts)
+			local gitsigns = require("gitsigns")
+			gitsigns.setup(opts)
+
+			vim.keymap.set("n", "<leader>hs", gitsigns.stage_hunk, { desc = "Git: stage hunk" })
+			vim.keymap.set("n", "<leader>hr", gitsigns.reset_hunk, { desc = "Git: reset hunk" })
+
+			vim.keymap.set("v", "<leader>hs", function()
+				gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+			end, { desc = "Git: stage hunk (visual)" })
+
+			vim.keymap.set("v", "<leader>hr", function()
+				gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+			end, { desc = "Git: reset hunk (visual)" })
+
+			vim.keymap.set("n", "<leader>hS", gitsigns.stage_buffer, { desc = "Git: stage buffer" })
+			vim.keymap.set("n", "<leader>hR", gitsigns.reset_buffer, { desc = "Git: reset buffer" })
+
+			vim.keymap.set("n", "<leader>hd", gitsigns.diffthis, { desc = "Git: diff this" })
+			vim.keymap.set("n", "<leader>hb", gitsigns.toggle_current_line_blame, { desc = "Git: toggle blame" })
+		end,
 	},
 
 	-- NOTE: Highlight todo, notes, etc in comments
