@@ -15,15 +15,17 @@ return {
 		{ "nvim-tree/nvim-web-devicons" },
 	},
 
-	config = function()
-		require("telescope").setup({
-			pickers = {
-				find_files = {
-					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-					follow = true,
-				},
+	opts = {
+		pickers = {
+			find_files = {
+				find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "--glob", "!.gitattributes" },
+				follow = true,
 			},
-		})
+		},
+	},
+
+	config = function(_, opts)
+		require("telescope").setup(opts)
 
 		-- NOTE: Enable Telescope extensions if they are installed
 		pcall(require("telescope").load_extension, "fzf")
