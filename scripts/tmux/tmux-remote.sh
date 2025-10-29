@@ -8,7 +8,11 @@ SSH_DIRECTORY="$2"
 
 # Check if Session is Running
 if tmux has-session -t $SESSION 2>/dev/null; then
-	tmux attach-session -t $SESSION
+	if [ -n "$TMUX" ]; then
+		tmux switch-client -t $SESSION
+	else
+		tmux attach-session -t $SESSION
+	fi
 	exit 0
 fi
 
@@ -32,4 +36,8 @@ tmux send-keys -t $SESSION:2 "cd $SSH_DIRECTORY; clear" C-m
 
 # Attach Session
 tmux select-window -t $SESSION:1
-tmux attach-session -t $SESSION
+if [ -n "$TMUX" ]; then
+	tmux switch-client -t $SESSION
+else
+	tmux attach-session -t $SESSION
+fi

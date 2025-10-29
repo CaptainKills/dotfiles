@@ -5,7 +5,11 @@ WORKING_DIRECTORY="/home/danick/dotfiles/$1/"
 
 # Check if Session is Running
 if tmux has-session -t $SESSION 2>/dev/null; then
-	tmux attach-session -t $SESSION
+	if [ -n "$TMUX" ]; then
+		tmux switch-client -t $SESSION
+	else
+		tmux attach-session -t $SESSION
+	fi
 	exit 0
 fi
 
@@ -26,4 +30,8 @@ tmux rename-window -t $SESSION:2 "terminal"
 
 # Attach Session
 tmux select-window -t $SESSION:1
-tmux attach-session -t $SESSION
+if [ -n "$TMUX" ]; then
+	tmux switch-client -t $SESSION
+else
+	tmux attach-session -t $SESSION
+fi
