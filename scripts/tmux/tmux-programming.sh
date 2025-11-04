@@ -14,7 +14,7 @@ if tmux has-session -t $SESSION 2>/dev/null; then
 fi
 
 # Fuzzy Pick Subdirectory
-selected=$(find $WORKING_DIRECTORY -maxdepth 1 -type d | fzf --tmux 40% -q "$WORKING_DIRECTORY" --bind 'q:abort')
+selected=$(find $WORKING_DIRECTORY -maxdepth 1 -type d | fzf --layout=reverse --height 40% --tmux 40% -q "$WORKING_DIRECTORY" --bind 'q:abort')
 fzf_status=$?
 
 if [[ $fzf_status -ne 0 || -z "$selected" ]]; then
