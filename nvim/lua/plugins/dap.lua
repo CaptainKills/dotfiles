@@ -2,6 +2,8 @@ return {
 	-- NOTE: Debug Adapter Protocol
 	{
 		"mfussenegger/nvim-dap",
+		lazy = true,
+		dependencies = { "rcarriga/nvim-dap-ui", "theHamsta/nvim-dap-virtual-text" },
 
 		config = function()
 			local dap = require("dap")
@@ -20,7 +22,8 @@ return {
 	-- NOTE: DAP User Interface
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = { "nvim-neotest/nvim-nio", "mfussenegger/nvim-dap" },
+		lazy = true,
+		dependencies = { "nvim-neotest/nvim-nio" },
 
 		opts = {
 			layouts = {
@@ -77,7 +80,7 @@ return {
 	-- NOTE: DAP Virtual Test
 	{
 		"theHamsta/nvim-dap-virtual-text",
-		dependencies = { "nvim-dap" },
+		lazy = true,
 
 		opts = {
 			virt_text_pos = "eol",

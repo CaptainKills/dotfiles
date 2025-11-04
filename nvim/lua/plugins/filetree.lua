@@ -2,6 +2,7 @@ return {
 	-- NOTE: Nvim Tree
 	{
 		"nvim-tree/nvim-tree.lua",
+		keys = { "<leader>t" },
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 
 		opts = {},

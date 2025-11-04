@@ -55,13 +55,14 @@ return {
 	-- NOTE: Ansible Neovim
 	{
 		"mfussenegger/nvim-ansible",
+		ft = { "yaml", "yaml.ansible" },
 		config = function() end,
 	},
 
 	-- NOTE: Typst Preview
 	{
 		"chomosuke/typst-preview.nvim",
-		ft = "typst",
+		ft = { "typst" },
 		version = "1.*",
 		opts = {
 			invert_colors = "auto",
