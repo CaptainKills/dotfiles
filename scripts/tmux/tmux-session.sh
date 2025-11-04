@@ -1,5 +1,6 @@
 #!/bin/bash
 
+SCRIPTS_DIR=/home/danick/dotfiles/scripts/tmux
 CATEGORIES=(
 	# Dotfiles
 	"bash"
@@ -20,56 +21,139 @@ CATEGORIES=(
 	"tue"
 )
 
-SCRIPTS_DIR=/home/danick/dotfiles/scripts/tmux
+source $SCRIPTS_DIR/tmux-management.sh
 
-selected=$(printf "%s\n" "${CATEGORIES[@]}" | fzf --layout=reverse --height 40% --tmux 40% --bind 'q:abort')
+# Select Session
+session=$(printf "%s\n" "${CATEGORIES[@]}" | fzf --layout=reverse --height 40% --tmux 40% --bind 'q:abort')
 fzf_status=$?
 
-if [[ $fzf_status -ne 0 || -z "$selected" ]]; then
+if [[ $fzf_status -ne 0 || -z "$session" ]]; then
 	exit 0
 fi
 
-case $selected in
+# Attach to Session if it exists
+check_session $session
+if [[ $? -eq 0 ]]; then
+	attach_session $session
+	exit 0
+fi
+
+# Create New Session
+case $session in
 # Dotfiles
 "bash")
-	source $SCRIPTS_DIR/tmux-dotfiles.sh "bash"
+	dir="/home/danick/dotfiles/bash/"
+
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: Terminal
+	create_window $session 2 $dir
 	;;
 "nvim")
-	source $SCRIPTS_DIR/tmux-dotfiles.sh "nvim"
+	dir="/home/danick/dotfiles/nvim/"
+
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: Terminal
+	create_window $session 2 $dir
 	;;
 "scripts")
-	source $SCRIPTS_DIR/tmux-dotfiles.sh "scripts"
+	dir="/home/danick/dotfiles/scripts/"
+
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: Terminal
+	create_window $session 2 $dir
 	;;
 "tmux")
-	source $SCRIPTS_DIR/tmux-dotfiles.sh "tmux"
+	dir="/home/danick/dotfiles/tmux/"
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: Terminal
+	create_window $session 2 $dir
 	;;
 
 # Programming
 "c")
-	source $SCRIPTS_DIR/tmux-programming.sh "c"
+	dir=$(pick_subdir "/home/danick/c/")
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: Terminal
+	create_window $session 2 $dir
 	;;
 "go")
-	source $SCRIPTS_DIR/tmux-programming.sh "go"
+	dir=$(pick_subdir "/home/danick/go/")
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: Terminal
+	create_window $session 2 $dir
 	;;
 "python")
-	source $SCRIPTS_DIR/tmux-programming.sh "python"
+	dir=$(pick_subdir "/home/danick/python/")
+	# Window 1: Neovim
+	create_session $session $dir
+	python_venv $session 1
+	nvim_window $session 1
+	# Window 2: Terminal
+	create_window $session 2 $dir
+	python_venv $session 2
 	;;
 "typst")
-	source $SCRIPTS_DIR/tmux-programming.sh "typst"
+	dir=$(pick_subdir "/home/danick/typst/")
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: Terminal
+	create_window $session 2 $dir
 	;;
 "ansible")
-	source $SCRIPTS_DIR/tmux-programming.sh "ansible"
+	dir="/home/danick/ansible/"
+	# Window 1: Neovim
+	create_session $session $dir
+	python_venv $session 1
+	attach_session $session
+	nvim_window $session 1
+	# Window 2: Terminal
+	create_window $session 2 $dir
+	python_venv $session 2
 	;;
 
 # Remotes
 "docker-proxmox")
-	source $SCRIPTS_DIR/tmux-remote.sh "docker-proxmox" "/home/danick/docker/"
+	dir="/home/danick/sshfs/docker-proxmox/"
+
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: SSH
+	create_window $session 2 $dir
+	ssh_window $session 2 "docker-proxmox" "/home/danick/docker/"
 	;;
 "docker-web")
-	source $SCRIPTS_DIR/tmux-remote.sh "docker-web" "/home/danick/docker/"
+	dir="/home/danick/sshfs/docker-web/"
+
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: SSH
+	create_window $session 2 $dir
+	ssh_window $session 2 "docker-web" "/home/danick/docker/"
 	;;
 "tue")
-	source $SCRIPTS_DIR/tmux-remote.sh "tue" "/home/student/"
+	dir="/home/danick/sshfs/tue/"
+
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: SSH
+	create_window $session 2 $dir
+	ssh_window $session 2 "tue" "/home/student/"
 	;;
 
 # Default
@@ -78,4 +162,5 @@ case $selected in
 	;;
 esac
 
+attach_session $session
 exit 0
