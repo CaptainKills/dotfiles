@@ -1,13 +1,13 @@
 return {
-	"folke/tokyonight.nvim",
-	priority = 1000,
+	{
+		-- "folke/tokyonight.nvim",
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
 
-	init = function()
-		require("tokyonight").setup({
-			on_colors = function(colors)
-				colors.border = colors.fg_dark
-			end,
-		})
-		vim.cmd.colorscheme("tokyonight-night")
-	end,
+		init = function()
+			-- vim.cmd.colorscheme("tokyonight-night")
+			vim.cmd.colorscheme("catppuccin-macchiato")
+		end,
+	},
 }
