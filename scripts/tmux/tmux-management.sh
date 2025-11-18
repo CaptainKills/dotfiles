@@ -85,3 +85,10 @@ python_venv() {
 
 	tmux send-keys -t $session:$window "source .venv/bin/activate && clear" C-m
 }
+
+git_update() {
+	local session=$1
+	local window=$2
+
+	tmux send-keys -t $session:$window "git fetch && git pull" C-m
+}

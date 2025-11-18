@@ -85,6 +85,7 @@ case $session in
 	nvim_window $session 1
 	# Window 2: Terminal
 	create_window $session 2 $dir
+	git_update $session 2
 	;;
 "go")
 	dir=$(pick_subdir "/home/danick/go/")
@@ -93,6 +94,7 @@ case $session in
 	nvim_window $session 1
 	# Window 2: Terminal
 	create_window $session 2 $dir
+	git_update $session 2
 	;;
 "python")
 	dir=$(pick_subdir "/home/danick/python/")
@@ -103,6 +105,7 @@ case $session in
 	# Window 2: Terminal
 	create_window $session 2 $dir
 	python_venv $session 2
+	git_update $session 2
 	;;
 "typst")
 	dir=$(pick_subdir "/home/danick/typst/")
