@@ -66,6 +66,14 @@ ssh_window() {
 	tmux send-keys -t $session:$window "cd $ssh_dir; clear" C-m
 }
 
+ai_window() {
+	local session=$1
+	local window=$2
+
+	tmux rename-window -t $session:$window "gemini"
+	tmux send-keys -t $session:$window "gemini" C-m
+}
+
 pick_subdir() {
 	local dir=$1
 

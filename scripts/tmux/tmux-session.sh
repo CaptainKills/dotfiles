@@ -49,6 +49,9 @@ case $session in
 	nvim_window $session 1
 	# Window 2: Terminal
 	create_window $session 2 $dir
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 "nvim")
 	dir="/home/danick/dotfiles/nvim/"
@@ -58,6 +61,9 @@ case $session in
 	nvim_window $session 1
 	# Window 2: Terminal
 	create_window $session 2 $dir
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 "scripts")
 	dir="/home/danick/dotfiles/scripts/"
@@ -67,6 +73,9 @@ case $session in
 	nvim_window $session 1
 	# Window 2: Terminal
 	create_window $session 2 $dir
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 "tmux")
 	dir="/home/danick/dotfiles/tmux/"
@@ -75,6 +84,9 @@ case $session in
 	nvim_window $session 1
 	# Window 2: Terminal
 	create_window $session 2 $dir
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 
 # Programming
@@ -86,6 +98,9 @@ case $session in
 	# Window 2: Terminal
 	create_window $session 2 $dir
 	git_update $session 2
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 "go")
 	dir=$(pick_subdir "/home/danick/go/")
@@ -95,6 +110,9 @@ case $session in
 	# Window 2: Terminal
 	create_window $session 2 $dir
 	git_update $session 2
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 "python")
 	dir=$(pick_subdir "/home/danick/python/")
@@ -106,6 +124,9 @@ case $session in
 	create_window $session 2 $dir
 	python_venv $session 2
 	git_update $session 2
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 "typst")
 	dir=$(pick_subdir "/home/danick/typst/")
@@ -114,17 +135,22 @@ case $session in
 	nvim_window $session 1
 	# Window 2: Terminal
 	create_window $session 2 $dir
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 "ansible")
 	dir="/home/danick/ansible/"
 	# Window 1: Neovim
 	create_session $session $dir
 	python_venv $session 1
-	attach_session $session
 	nvim_window $session 1
 	# Window 2: Terminal
 	create_window $session 2 $dir
 	python_venv $session 2
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 
 # Remotes
@@ -137,6 +163,9 @@ case $session in
 	# Window 2: SSH
 	create_window $session 2 $dir
 	ssh_window $session 2 "docker-proxmox" "/home/danick/docker/"
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 "docker-web")
 	dir="/home/danick/sshfs/docker-web/"
@@ -147,6 +176,9 @@ case $session in
 	# Window 2: SSH
 	create_window $session 2 $dir
 	ssh_window $session 2 "docker-web" "/home/danick/docker/"
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 "tue")
 	dir="/home/danick/sshfs/tue/"
@@ -157,6 +189,9 @@ case $session in
 	# Window 2: SSH
 	create_window $session 2 $dir
 	ssh_window $session 2 "tue" "/home/student/"
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
 	;;
 
 # Default
