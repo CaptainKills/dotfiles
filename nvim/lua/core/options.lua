@@ -2,8 +2,6 @@
 vim.g.mapleader = " " -- Set <space> as the leader key
 vim.g.maplocalleader = " " -- Set <space> as the leader key
 vim.g.nerd_font = true -- Enable Nerd Font
-vim.g.loaded_netrw = 1 -- Disabled Netrw for nvim-tree
-vim.g.loaded_netrwplugin = 1
 vim.g.clipboard = "xclip" -- Set xclip as clipboard provider
 
 vim.opt.number = true -- Enable line numbers
