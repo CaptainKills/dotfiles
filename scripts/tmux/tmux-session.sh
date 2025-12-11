@@ -81,7 +81,7 @@ case $session in
 	dir="/home/danick/dotfiles/tmux/"
 	# Window 1: Neovim
 	create_session $session $dir
-	nvim_window $session 1
+	nvim_window $session 1 tmux.conf
 	# Window 2: Terminal
 	create_window $session 2 $dir
 	# Window 3: AI
@@ -157,6 +157,8 @@ case $session in
 "docker-proxmox")
 	dir="/home/danick/sshfs/docker-proxmox/"
 
+	# Mount SSH-FS
+	mount_ssh "docker-proxmox" "/home/danick/docker/"
 	# Window 1: Neovim
 	create_session $session $dir
 	nvim_window $session 1
@@ -170,6 +172,8 @@ case $session in
 "docker-web")
 	dir="/home/danick/sshfs/docker-web/"
 
+	# Mount SSH-FS
+	mount_ssh "docker-web" "/home/danick/docker/"
 	# Window 1: Neovim
 	create_session $session $dir
 	nvim_window $session 1
@@ -183,6 +187,8 @@ case $session in
 "tue")
 	dir="/home/danick/sshfs/tue/"
 
+	# Mount SSH-FS
+	mount_ssh "tue" "/home/student/"
 	# Window 1: Neovim
 	create_session $session $dir
 	nvim_window $session 1

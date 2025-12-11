@@ -42,28 +42,23 @@ create_window() {
 nvim_window() {
 	local session=$1
 	local window=$2
+	local file=$3
 
 	tmux rename-window -t $session:$window "nvim"
-	tmux send-keys -t $session:$window "nvim" C-m
+	tmux send-keys -t $session:$window "nvim $file" C-m
 }
 
 ssh_window() {
 	local session=$1
 	local window=$2
-	local dir="/home/danick/sshfs/$3/"
 
-	local ssh_host=$3
-	local ssh_dir=$4
-
-	# Mount SSH Directory via SSH-FS
-	if ! mountpoint -q $dir; then
-		sshfs $ssh_host:$ssh_dir $dir
-	fi
+	local host=$3
+	local dir=$4
 
 	# Create SSH Window
 	tmux rename-window -t $session:$window "ssh"
-	tmux send-keys -t $session:$window "ssh $ssh_host" C-m
-	tmux send-keys -t $session:$window "cd $ssh_dir; clear" C-m
+	tmux send-keys -t $session:$window "ssh $host" C-m
+	tmux send-keys -t $session:$window "cd $dir; clear" C-m
 }
 
 ai_window() {
@@ -72,6 +67,17 @@ ai_window() {
 
 	tmux rename-window -t $session:$window "gemini"
 	tmux send-keys -t $session:$window "gemini" C-m
+}
+
+mount_ssh() {
+	local sshfs_dir="/home/danick/sshfs/$1/"
+	local ssh_host=$1
+	local ssh_dir=$2
+
+	# Mount SSH Directory via SSH-FS
+	if ! mountpoint -q $sshfs_dir; then
+		sshfs $ssh_host:$ssh_dir $sshfs_dir
+	fi
 }
 
 pick_subdir() {
