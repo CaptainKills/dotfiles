@@ -54,6 +54,7 @@ return {
 		"--completion-style=detailed",
 		"--header-insertion=iwyu",
 		"--pretty",
+		-- "--query-driver=/usr/bin/...",
 	},
 	filetypes = { "c", "cpp" },
 	root_markers = {
