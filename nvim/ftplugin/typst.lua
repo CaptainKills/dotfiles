@@ -6,7 +6,8 @@ vim.cmd([[
 ]])
 
 -- Format Paragraph Keymap
-vim.keymap.set("n", "gq", "vipgq", { desc = "Format paragraph according to formatoptions" })
+vim.keymap.set("n", "gq", "vipgq", { desc = "Format paragraph according with formatexpr" })
+vim.keymap.set("n", "gw", "vipgw", { desc = "Format paragraph according without formatexpr" })
 
 -- LSP: General Keymaps
 vim.keymap.set("n", "<leader>li", ":LspTinymistGetServerInfo<CR>", { desc = "Typst: Get LSP Info" })
