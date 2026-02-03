@@ -72,4 +72,15 @@ return {
 			},
 		},
 	},
+
+	-- NOTE: LTeX Extra (Dictionary/Rules)
+	{
+		"barreiroleo/ltex_extra.nvim",
+		ft = { "markdown", "typst" },
+		branch = "dev",
+		opts = {
+			load_langs = { "en-GB" },
+			path = ".ltex",
+		},
+	},
 }
