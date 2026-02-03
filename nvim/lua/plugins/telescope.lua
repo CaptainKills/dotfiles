@@ -18,7 +18,16 @@ return {
 	opts = {
 		pickers = {
 			find_files = {
-				find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "--glob", "!.gitattributes" },
+				find_command = {
+					"rg",
+					"--files",
+					"--hidden",
+					"--glob",
+					"!**/.git/*",
+					"--glob",
+					"!.gitattributes",
+					"--sort=path",
+				},
 				follow = true,
 			},
 		},
