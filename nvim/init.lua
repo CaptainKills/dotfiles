@@ -1,9 +1,9 @@
 -- Neovim Config: Danick Triantis
-
 require("core.options")
 require("core.keymaps")
 require("core.terminal")
 require("core.lsp")
+require("core.autocommands")
 
 -- NOTE: Install `lazy.nvim` plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
