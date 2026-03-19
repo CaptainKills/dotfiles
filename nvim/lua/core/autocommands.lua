@@ -18,5 +18,6 @@ end
 register_autocmd("Lua", "init.lua")
 register_autocmd("C", "src/main.c")
 register_autocmd("Golang", "main.go")
+register_autocmd("Rust", "src/main.rs")
 register_autocmd("Python", "main.py")
 register_autocmd("Typst", "main.typ")

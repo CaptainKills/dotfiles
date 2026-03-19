@@ -23,6 +23,10 @@ M.mason = {
 		"goimports-reviser", -- Formatter
 		"delve", -- DAP
 
+		-- Rust
+		-- "rust-analyzer", -- LSP
+		-- "rustfmt", -- Formatter
+
 		-- Python
 		"pyright", -- LSP
 		"black", -- Formatter
@@ -55,6 +59,9 @@ M.lsp = {
 
 	-- Go
 	"gopls",
+
+	-- Rust
+	"rust_analyzer",
 
 	-- Python
 	"pyright",
@@ -97,6 +104,8 @@ M.formatter = {
 		json = { "clang-format" },
 
 		go = { "gofumpt", "goimports-reviser" },
+
+		rust = { "rustfmt" },
 
 		python = { "black" },
 
