@@ -1,8 +1,8 @@
 return {
 	-- NOTE: Detect tabstop and shiftwidth automatically
 	{
-		"tpope/vim-sleuth",
-		config = function() end,
+		"NMAC427/guess-indent.nvim",
+		opts = {},
 	},
 
 	-- NOTE: Autocomment via "gc", "gcc", "gbc", "gcO", "gco", "gca"
