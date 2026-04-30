@@ -29,7 +29,7 @@ M.mason = {
 
 		-- Python
 		"pyright", -- LSP
-		"black", -- Formatter
+		"ruff", -- Formatter
 
 		-- Ansible
 		"ansible-language-server", -- LSP
@@ -101,13 +101,15 @@ M.formatter = {
 		sh = { "shfmt" },
 
 		c = { "clang-format" },
+		cpp = { "clang-format" },
+		cuda = { "clang-format" },
 		json = { "clang-format" },
 
 		go = { "gofumpt", "goimports-reviser" },
 
 		rust = { "rustfmt" },
 
-		python = { "black" },
+		python = { "ruff_format" },
 
 		yaml = { "yamlfmt" },
 		["yaml.ansible"] = { "yamlfmt" },
