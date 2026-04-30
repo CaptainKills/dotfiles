@@ -12,6 +12,8 @@ return {
 				typeCheckingMode = "standard",
 			},
 			pythonPath = "python3",
+			venvPath = vim.fn.getcwd(),
+			venv = ".venv",
 		},
 	},
 }
