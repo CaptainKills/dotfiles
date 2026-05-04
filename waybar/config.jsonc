@@ -107,8 +107,8 @@
     "menu": "on-click",
     "menu-file": "$HOME/.config/waybar/power_menu.xml",
     "menu-actions": {
-      "shutdown": "shutdown",
-      "reboot": "reboot",
+      "shutdown": "shutdown 0",
+      "reboot": "reboot 0",
       "logout": "hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit",
     },
     "tooltip": false,
