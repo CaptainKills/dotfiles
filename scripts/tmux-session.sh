@@ -1,15 +1,20 @@
 #!/bin/bash
 
-SCRIPTS_DIR=/home/danick/dotfiles/scripts/tmux
+DOTFILES_DIR="$PROJECTS_DIR/dotfiles"
+SCRIPTS_DIR="$DOTFILES_DIR/scripts/"
+
 CATEGORIES=(
 	# Dotfiles
 	"bash"
 	"nvim"
 	"scripts"
 	"tmux"
-	"ansible"
+	"hypr"
+	"waybar"
+	"kitty"
 
 	# Programming
+	"ansible"
 	"c"
 	"go"
 	"rust"
@@ -22,7 +27,7 @@ CATEGORIES=(
 	"tue"
 )
 
-source $SCRIPTS_DIR/tmux-management.sh
+source "$SCRIPTS_DIR/tmux-management.sh"
 
 # Select Session
 session=$(printf "%s\n" "${CATEGORIES[@]}" | fzf --layout=reverse --height 40% --tmux 40% --bind 'q:abort')
@@ -43,7 +48,7 @@ fi
 case $session in
 # Dotfiles
 "bash")
-	dir="/home/danick/dotfiles/bash/"
+	dir="$DOTFILES_DIR/bash/"
 
 	# Window 1: Neovim
 	create_session $session $dir
@@ -52,7 +57,7 @@ case $session in
 	create_window $session 2 $dir
 	;;
 "nvim")
-	dir="/home/danick/dotfiles/nvim/"
+	dir="$DOTFILES_DIR/nvim/"
 
 	# Window 1: Neovim
 	create_session $session $dir
@@ -61,7 +66,7 @@ case $session in
 	create_window $session 2 $dir
 	;;
 "scripts")
-	dir="/home/danick/dotfiles/scripts/"
+	dir="$DOTFILES_DIR/scripts/"
 
 	# Window 1: Neovim
 	create_session $session $dir
@@ -70,15 +75,46 @@ case $session in
 	create_window $session 2 $dir
 	;;
 "tmux")
-	dir="/home/danick/dotfiles/tmux/"
+	dir="$DOTFILES_DIR/tmux/"
+
 	# Window 1: Neovim
 	create_session $session $dir
 	nvim_window $session 1 tmux.conf
 	# Window 2: Terminal
 	create_window $session 2 $dir
 	;;
+"hypr")
+	dir="$DOTFILES_DIR/hypr/"
+
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1 hyprland.conf
+	# Window 2: Terminal
+	create_window $session 2 $dir
+	;;
+"waybar")
+	dir="$DOTFILES_DIR/waybar/"
+
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1 config.jsonc
+	# Window 2: Terminal
+	create_window $session 2 $dir
+	;;
+"kitty")
+	dir="$DOTFILES_DIR/kitty/"
+
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1 kitty.conf
+	# Window 2: Terminal
+	create_window $session 2 $dir
+	;;
+
+# Programming
 "ansible")
-	dir="/home/danick/ansible/"
+	dir="$PROJECTS_DIR/ansible/"
+
 	# Window 1: Neovim
 	create_session $session $dir
 	python_venv $session 1
@@ -87,10 +123,9 @@ case $session in
 	create_window $session 2 $dir
 	python_venv $session 2
 	;;
-
-# Programming
 "c")
-	dir=$(pick_subdir "/home/danick/c/")
+	dir=$(pick_subdir "$PROJECTS_DIR/c/")
+
 	# Window 1: Neovim
 	create_session $session $dir
 	nvim_window $session 1
@@ -102,7 +137,8 @@ case $session in
 	ai_window $session 3
 	;;
 "go")
-	dir=$(pick_subdir "/home/danick/go/")
+	dir=$(pick_subdir "$PROJECTS_DIR/go/")
+
 	# Window 1: Neovim
 	create_session $session $dir
 	nvim_window $session 1
@@ -114,7 +150,8 @@ case $session in
 	ai_window $session 3
 	;;
 "rust")
-	dir=$(pick_subdir "/home/danick/rust/")
+	dir=$(pick_subdir "$PROJECTS_DIR/rust/")
+
 	# Window 1: Neovim
 	create_session $session $dir
 	nvim_window $session 1
@@ -126,7 +163,8 @@ case $session in
 	ai_window $session 3
 	;;
 "python")
-	dir=$(pick_subdir "/home/danick/python/")
+	dir=$(pick_subdir "$PROJECTS_DIR/python/")
+
 	# Window 1: Neovim
 	create_session $session $dir
 	python_venv $session 1
@@ -140,7 +178,8 @@ case $session in
 	ai_window $session 3
 	;;
 "typst")
-	dir=$(pick_subdir "/home/danick/typst/")
+	dir=$(pick_subdir "$PROJECTS_DIR/typst/")
+
 	# Window 1: Neovim
 	create_session $session $dir
 	nvim_window $session 1
@@ -153,7 +192,7 @@ case $session in
 
 # Remotes
 "docker-proxmox")
-	dir="/home/danick/sshfs/docker-proxmox/"
+	dir="$PROJECTS_DIR/sshfs/docker-proxmox/"
 
 	# Mount SSH-FS
 	mount_ssh "docker-proxmox" "/home/danick/docker/"
@@ -165,7 +204,7 @@ case $session in
 	ssh_window $session 2 "docker-proxmox" "/home/danick/docker/"
 	;;
 "docker-web")
-	dir="/home/danick/sshfs/docker-web/"
+	dir="$PROJECTS_DIR/sshfs/docker-web/"
 
 	# Mount SSH-FS
 	mount_ssh "docker-web" "/home/danick/docker/"
@@ -177,7 +216,7 @@ case $session in
 	ssh_window $session 2 "docker-web" "/home/danick/docker/"
 	;;
 "tue")
-	dir="/home/danick/sshfs/tue/"
+	dir="$PROJECTS_DIR/sshfs/tue/"
 
 	# Mount SSH-FS
 	mount_ssh "tue" "/home/student/"

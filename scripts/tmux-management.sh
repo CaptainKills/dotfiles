@@ -70,7 +70,7 @@ ai_window() {
 }
 
 mount_ssh() {
-	local sshfs_dir="/home/danick/sshfs/$1/"
+	local sshfs_dir="$PROJECTS_DIR/sshfs/$1/"
 	local ssh_host=$1
 	local ssh_dir=$2
 

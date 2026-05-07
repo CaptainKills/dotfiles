@@ -7,7 +7,7 @@ if [[ $url == git@* ]]; then
 	url="${url/:/\/}"
 	url="https://$url"
 
-	explorer.exe $url
+	xdg-open $url
 else
 	echo "This repository is not using an SSH remote (git@...)"
 fi
