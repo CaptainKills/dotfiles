@@ -103,7 +103,9 @@ M.formatter = {
 		c = { "clang-format" },
 		cpp = { "clang-format" },
 		cuda = { "clang-format" },
-		json = { "clang-format" },
+
+		json = { "jq" },
+		jsonc = { "jq" },
 
 		go = { "gofumpt", "goimports-reviser" },
 
