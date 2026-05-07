@@ -2,7 +2,7 @@
 vim.g.mapleader = " " -- Set <space> as the leader key
 vim.g.maplocalleader = " " -- Set <space> as the leader key
 vim.g.nerd_font = true -- Enable Nerd Font
-vim.g.clipboard = "xclip" -- Set xclip as clipboard provider
+vim.g.clipboard = "wl-copy" -- Set clipboard provider
 
 vim.opt.number = true -- Enable line numbers
 vim.opt.relativenumber = true -- Enable relative line numbers
