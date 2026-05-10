@@ -26,3 +26,10 @@ fi
 # Fuzzy Finder
 export FZF_ALT_C_COMMAND=
 eval "$(fzf --bash)"
+
+# Golang
+export GOPATH="/home/danick/Projects/go"
+export PATH=$PATH:/home/danick/Projects/go/bin
+
+# Nvidia CUDA
+export PATH=$PATH:/usr/local/cuda/bin
