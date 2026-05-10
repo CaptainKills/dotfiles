@@ -175,6 +175,7 @@ case $session in
 	git_update $session 2
 	# Window 3: AI
 	create_window $session 3 $dir
+	python_venv $session 3
 	ai_window $session 3
 	;;
 "typst")
