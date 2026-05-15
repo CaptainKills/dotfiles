@@ -9,9 +9,9 @@ CONNECTION_NAME="VPN Eindhoven"
 if nmcli connection show --active | grep -q "${CONNECTION_NAME}"; then
 	# Is active, so disconnect
 	nmcli connection down "${CONNECTION_NAME}"
-	notify-send -i wireguard -u low "${CONNECTION_NAME}" "Status: Disabled"
+	# notify-send -i wireguard -u low "${CONNECTION_NAME}" "Status: Disabled"
 else
 	# Is not active, so connect
 	nmcli connection up "${CONNECTION_NAME}"
-	notify-send -i wireguard -u low "${CONNECTION_NAME}" "Status: Enabled"
+	# notify-send -i wireguard -u low "${CONNECTION_NAME}" "Status: Enabled"
 fi

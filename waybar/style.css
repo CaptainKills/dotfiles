@@ -119,6 +119,10 @@
   color: #c6d0f5;
 }
 
+#custom-vpn.connected {
+  color: #a6d189;
+}
+
 #battery {
   color: #c6d0f5;
 }
@@ -161,7 +165,7 @@
 }
 
 #battery {
-  color: #99d1db;;
+  color: #99d1db;
 }
 
 #battery.charging {
