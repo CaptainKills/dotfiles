@@ -81,6 +81,7 @@
 #backlight,
 #network,
 #custom-power,
+#custom-vpn,
 #battery {
   background-color: #1a1b26;
   padding: 0.3rem 0.7rem;
@@ -97,6 +98,7 @@
 #backlight:hover,
 #network:hover,
 #custom-power:hover,
+#custom-vpn:hover,
 #battery:hover {
   background-color: rgb(41, 42, 53);
 }
@@ -111,6 +113,10 @@
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
   margin-right: 7px;
+}
+
+#custom-vpn {
+  color: #c6d0f5;
 }
 
 #battery {

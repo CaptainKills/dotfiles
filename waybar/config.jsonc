@@ -2,32 +2,28 @@
   "layer": "top",
   "position": "top",
   "margin-bottom": -5,
-  "spacing" : 0,
-
+  "spacing": 0,
   "modules-left": [
     "hyprland/workspaces",
     "cpu",
     "memory",
-    "tray",
+    "tray"
   ],
-
   "modules-center": [
-    "clock",
+    "clock"
   ],
-
   "modules-right": [
     "bluetooth",
     "network",
+    "custom/vpn",
     "pulseaudio",
     "backlight",
     "battery",
-    "custom/power",
+    "custom/power"
   ],
-
   "tray": {
-    "spacing": 5,
+    "spacing": 5
   },
-
   "hyprland/workspaces": {
     "format": "{icon} {name}",
     "format-icons": {
@@ -35,78 +31,96 @@
       "default": ""
     }
   },
-
   "bluetooth": {
     "format": "󰂲 ",
     "format-on": "{icon}",
-    "format-off": "{icon}", 
-    "format-connected":"{icon}",
-    "format-icons":{
-        "on":"󰂯",
-        "off": "󰂲",
-        "connected": "󰂱",
-        },
+    "format-off": "{icon}",
+    "format-connected": "{icon}",
+    "format-icons": {
+      "on": "󰂯",
+      "off": "󰂲",
+      "connected": "󰂱"
+    },
     "on-click": "blueman-manager",
-    "tooltip-format-connected":"{device_enumerate}"
+    "tooltip-format-connected": "{device_enumerate}"
   },
-
   "clock": {
     "timezone": "Europe/Amsterdam",
     "format": "{:%H:%M - %d-%m-%y}",
     "tooltip": false,
     "interval": 1
   },
-
   "network": {
     "format-wifi": "󰤢  {essid}",
     "format-ethernet": "󰈀  {essid}",
     "format-disconnected": "󰤠 ",
     "on-click": "nm-connection-editor",
-    "interval": 5
- },
-
+    "interval": 5,
+    "tooltip-format": "{ipaddr}"
+  },
   "cpu": {
     "format": "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%",
-    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "format-icons": [
+      "▁",
+      "▂",
+      "▃",
+      "▄",
+      "▅",
+      "▆",
+      "▇",
+      "█"
+    ],
     "on-click": "kitty htop",
     "interval": 5
   },
-
   "memory": {
     "format": "  {used:0.1f}G/{total:0.1f}G",
-    "interval": 30,
+    "interval": 30
   },
-
   "backlight": {
     "format": "{icon}  {percent}%",
-    "format-icons": ["","󰃜", "󰃛", "󰃞","󰃝","󰃟","󰃠"],
-    "tooltip": false,
+    "format-icons": [
+      "",
+      "󰃜",
+      "󰃛",
+      "󰃞",
+      "󰃝",
+      "󰃟",
+      "󰃠"
+    ],
+    "tooltip": false
   },
-
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": " ",
     "format-icons": {
-      "default": ["", "", ""]
+      "default": [
+        "",
+        "",
+        ""
+      ]
     },
     "on-click": "pavucontrol"
   },
-
   "battery": {
-    "interval":2,
+    "interval": 2,
     "states": {
       "warning": 50,
       "critical": 20
     },
-
     "format": "{icon}  {capacity}%",
     "format-full": "{icon}  {capacity}%",
     "format-charging": " {capacity}%",
     "format-plugged": " {capacity}%",
     "format-alt": "{icon} {time}",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
-
   "custom/power": {
     "format": "⏻ ",
     "menu": "on-click",
@@ -114,8 +128,22 @@
     "menu-actions": {
       "shutdown": "shutdown 0",
       "reboot": "reboot",
-      "logout": "hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit",
+      "logout": "hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"
     },
-    "tooltip": false,
+    "tooltip": false
+  },
+  "custom/vpn": {
+    "format": "{icon} ",
+    "format-icons": {
+      "default": "",
+      "none": "󰻌",
+      "connected": "",
+      "disconnected": ""
+    },
+    "interval": 5,
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/nm-status.sh",
+    "on-click": "$HOME/.config/waybar/nm-toggle.sh",
+    "signal": 8
   }
 }
