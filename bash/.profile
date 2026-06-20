@@ -34,5 +34,6 @@ export PATH=$PATH:/home/danick/Projects/go/bin
 # Rust
 export PATH=$PATH:/home/danick/.cargo/bin
 . "$HOME/.cargo/env"
-# Nvidia CUDA
-export PATH=$PATH:/usr/local/cuda/bin
+
+# Matlab
+export LD_PRELOAD=/usr/lib64/libstdc++.so.6
