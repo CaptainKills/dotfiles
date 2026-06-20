@@ -70,7 +70,7 @@
       "▇",
       "█"
     ],
-    "on-click": "kitty htop",
+    "on-click": "kitty btop",
     "interval": 5
   },
   "memory": {
