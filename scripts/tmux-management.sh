@@ -66,7 +66,7 @@ ai_window() {
 	local window=$2
 
 	tmux rename-window -t $session:$window "gemini"
-	tmux send-keys -t $session:$window "gemini" C-m
+	tmux send-keys -t $session:$window "agy" C-m
 }
 
 mount_ssh() {
