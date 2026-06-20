@@ -7,6 +7,12 @@ return {
 		opts = {
 			constrain_cursor = "name",
 
+			float = {
+				max_width = 0.75,
+				max_height = 0.75,
+				preview_split = "right",
+			},
+
 			view_options = {
 				show_hidden = true,
 
@@ -20,7 +26,9 @@ return {
 			local oil = require("oil")
 			oil.setup(opts)
 
-			vim.keymap.set("n", "<leader>e", oil.open, { desc = "Oil: Open working directory" })
+			vim.keymap.set("n", "<leader>e", function()
+				oil.toggle_float(nil, { preview = {} })
+			end, { desc = "Oil: Open working directory" })
 		end,
 	},
 }
