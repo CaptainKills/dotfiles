@@ -16,3 +16,5 @@ alias sshfs-web="sshfs danick@web.$DOMAIN:/home/danick/docker $SSHFS_DIR/docker-
 
 # TMUX Session Scripts
 alias session="bash $PROJECTS_DIR/dotfiles/scripts/tmux-session.sh"
+
+alias phone="sudo jmtpfs -o allow_other -o uid=1000 -o gid=1000 /mnt/phone"
