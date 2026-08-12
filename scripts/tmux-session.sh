@@ -88,7 +88,7 @@ case $session in
 
 	# Window 1: Neovim
 	create_session $session $dir
-	nvim_window $session 1 hyprland.conf
+	nvim_window $session 1 hyprland.lua
 	# Window 2: Terminal
 	create_window $session 2 $dir
 	;;
