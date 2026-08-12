@@ -125,6 +125,9 @@ return {
 
 	settings = {
 		["rust-analyzer"] = {
+			check = {
+				command = "clippy",
+			},
 			lens = {
 				debug = { enable = true },
 				enable = true,

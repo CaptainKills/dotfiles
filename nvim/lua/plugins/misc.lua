@@ -68,7 +68,7 @@ return {
 			invert_colors = "auto",
 
 			dependencies_bin = {
-				["tinymist"] = "tinymist",
+				tinymist = "tinymist",
 			},
 		},
 	},
