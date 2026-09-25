@@ -123,10 +123,6 @@
   color: #a6d189;
 }
 
-#battery {
-  color: #c6d0f5;
-}
-
 #cpu {
   color: #c6d0f5;
 }
@@ -173,6 +169,10 @@
 }
 
 #battery.warning:not(.charging) {
+  color: #cd9532;
+}
+
+#battery.critical:not(.charging) {
   color: #e78284;
 }
 
