@@ -16,6 +16,7 @@ CATEGORIES=(
 	# Programming
 	"ansible"
 	"c"
+	"cpp"
 	"go"
 	"rust"
 	"python"
@@ -125,6 +126,19 @@ case $session in
 	;;
 "c")
 	dir=$(pick_subdir "$PROJECTS_DIR/c/")
+
+	# Window 1: Neovim
+	create_session $session $dir
+	nvim_window $session 1
+	# Window 2: Terminal
+	create_window $session 2 $dir
+	git_update $session 2
+	# Window 3: AI
+	create_window $session 3 $dir
+	ai_window $session 3
+	;;
+"cpp")
+	dir=$(pick_subdir "$PROJECTS_DIR/cpp/")
 
 	# Window 1: Neovim
 	create_session $session $dir
