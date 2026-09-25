@@ -9,7 +9,7 @@ hl.monitor({
 })
 
 hl.monitor({
-	output = "desc:Dell Inc. DELL P2418D MY3ND0120JTT,",
+	output = "desc:Dell Inc. DELL P2418D MY3ND0120JTT",
 	mode = "2560x1440@60",
 	position = "auto-right",
 	scale = "1.25",
@@ -31,9 +31,6 @@ hl.on("hyprland.start", function()
 
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("swaync")
-
-	hl.exec_cmd('gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"')
-	hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-light"')
 end)
 
 -- INFO: Environment Variables
@@ -133,9 +130,9 @@ hl.config({
 hl.config({
 	input = {
 		kb_layout = "us",
-		kb_variant = "",
+		kb_variant = "intl",
 		kb_model = "",
-		kb_options = "",
+		kb_options = "caps:escape",
 		kb_rules = "",
 
 		follow_mouse = 1,
@@ -167,7 +164,12 @@ local browser = flatpak .. "com.brave.Browser"
 local spotify = flatpak .. "com.spotify.Client"
 local bitwarden = flatpak .. "com.bitwarden.desktop"
 local discord = flatpak .. "com.discordapp.Discord"
-local obsidian = flatpak .. "md.obsidian.Obsidian"
+
+local whatsapp = browser .. " https://web.whatsapp.com"
+local notion = browser .. " https://app.notion.com"
+local outlook = browser .. " https://outlook.office.com"
+
+local teams = "/opt/teams-for-linux/teams-for-linux --ozone-platform=x11 %U"
 
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
@@ -179,29 +181,32 @@ hl.bind(mainMod .. " + BRACKETRIGHT", hl.dsp.workspace.move({ monitor = 1 }))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("hyprlauncher"))
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("nautilus"))
-hl.bind("SUPER + J", hl.dsp.layout("hyprlock"))
+hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("PRINT", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
+hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("grim"))
 
 -- Dark Mode / Light Mode
 hl.bind(mainMod .. " + TAB", function()
 	hl.dispatch(hl.dsp.exec_cmd("hyprctl hyprsunset temperature 6000"))
 	hl.dispatch(hl.dsp.exec_cmd('gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"'))
+	hl.dispatch(hl.dsp.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-light"'))
 end)
 
 hl.bind(mainMod .. " + SHIFT + TAB", function()
 	hl.dispatch(hl.dsp.exec_cmd("hyprctl hyprsunset temperature 1500"))
 	hl.dispatch(hl.dsp.exec_cmd('gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"'))
+	hl.dispatch(hl.dsp.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"'))
 end)
 
 -- Applications
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(spotify))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(discord))
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser .. " https://web.whatsapp.com"))
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(whatsapp))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(bitwarden))
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(obsidian))
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(browser .. " https://outlook.office.com"))
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("teams-for-linux"))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notion))
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(outlook))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(teams))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
@@ -263,11 +268,11 @@ hl.workspace_rule({ workspace = "2", monitor = "eDP-1" })
 hl.workspace_rule({ workspace = "3", monitor = "eDP-1" })
 hl.workspace_rule({ workspace = "4", monitor = "eDP-1" })
 hl.workspace_rule({ workspace = "5", monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "6", monitor = "monitor:desc:Dell Inc. DELL P2418D MY3ND0120JTT", default = true })
-hl.workspace_rule({ workspace = "7", monitor = "monitor:desc:Dell Inc. DELL P2418D MY3ND0120JTT" })
-hl.workspace_rule({ workspace = "8", monitor = "monitor:desc:Dell Inc. DELL P2418D MY3ND0120JTT" })
-hl.workspace_rule({ workspace = "9", monitor = "monitor:desc:Dell Inc. DELL P2418D MY3ND0120JTT" })
-hl.workspace_rule({ workspace = "10", monitor = "monitor:desc:Dell Inc. DELL P2418D MY3ND0120JTT" })
+hl.workspace_rule({ workspace = "6", monitor = "desc:Dell Inc. DELL P2418D MY3ND0120JTT", default = true })
+hl.workspace_rule({ workspace = "7", monitor = "desc:Dell Inc. DELL P2418D MY3ND0120JTT" })
+hl.workspace_rule({ workspace = "8", monitor = "desc:Dell Inc. DELL P2418D MY3ND0120JTT" })
+hl.workspace_rule({ workspace = "9", monitor = "desc:Dell Inc. DELL P2418D MY3ND0120JTT" })
+hl.workspace_rule({ workspace = "10", monitor = "desc:Dell Inc. DELL P2418D MY3ND0120JTT" })
 
 -- INFO: Windows Rules
 -- https://wiki.hypr.land/Configuring/Window-Rules/
