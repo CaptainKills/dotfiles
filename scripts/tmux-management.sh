@@ -56,9 +56,11 @@ ssh_window() {
 	local dir=$4
 
 	# Create SSH Window
-	tmux rename-window -t $session:$window "ssh"
-	tmux send-keys -t $session:$window "ssh $host" C-m
-	tmux send-keys -t $session:$window "cd $dir; clear" C-m
+	if [[ "$session" == *"sshfs"* ]]; then
+		tmux rename-window -t $session:$window "ssh"
+		tmux send-keys -t $session:$window "ssh $host" C-m
+		tmux send-keys -t $session:$window "cd $dir; clear" C-m
+	fi
 }
 
 ai_window() {
@@ -72,7 +74,7 @@ ai_window() {
 mount_ssh() {
 	local sshfs_dir="$PROJECTS_DIR/sshfs/$1/"
 	local ssh_host=$1
-	local ssh_dir=$2
+	local ssh_dir="/home/danick/"
 
 	# Mount SSH Directory via SSH-FS
 	if ! mountpoint -q $sshfs_dir; then
@@ -80,29 +82,26 @@ mount_ssh() {
 	fi
 }
 
-pick_subdir() {
-	local dir=$1
-
-	selected=$(find $dir -maxdepth 1 -type d | fzf --layout=reverse --height 40% --tmux 40% -q "$dir" --bind 'q:abort')
-	fzf_status=$?
-
-	if [[ $fzf_status -ne 0 || -z "$selected" ]]; then
-		echo ""
-	else
-		echo $selected
-	fi
-}
-
 python_venv() {
 	local session=$1
 	local window=$2
+	local dir=$3
 
-	tmux send-keys -t $session:$window "source .venv/bin/activate && clear" C-m
+	# Activate venv if it exists
+	local check=$(ls -a $dir)
+	if [[ "$check" == *".venv"* ]]; then
+		tmux send-keys -t $session:$window "source .venv/bin/activate && clear" C-m
+	fi
 }
 
 git_update() {
 	local session=$1
 	local window=$2
+	local dir=$3
 
-	tmux send-keys -t $session:$window "git fetch && git pull" C-m
+	# Refresh git if it exists
+	local check=$(ls -a $dir)
+	if [[ "$check" == *".git"* ]]; then
+		tmux send-keys -t $session:$window "git fetch && git pull" C-m
+	fi
 }
