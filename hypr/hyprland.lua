@@ -164,12 +164,11 @@ local browser = flatpak .. "com.brave.Browser"
 local spotify = flatpak .. "com.spotify.Client"
 local bitwarden = flatpak .. "com.bitwarden.desktop"
 local discord = flatpak .. "com.discordapp.Discord"
+local teams = flatpak .. "com.github.IsmaelMartinez.teams_for_linux"
 
 local whatsapp = browser .. " https://web.whatsapp.com"
 local notion = browser .. " https://app.notion.com"
 local outlook = browser .. " https://outlook.office.com"
-
-local teams = "/opt/teams-for-linux/teams-for-linux --ozone-platform=x11 %U"
 
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
