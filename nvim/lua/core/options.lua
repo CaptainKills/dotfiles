@@ -43,6 +43,7 @@ vim.filetype.add({
 		hpp = "cpp",
 		cpp = "cpp",
 		mcrl2 = "mcrl2",
+		mcf = "mcf",
 	},
 
 	filename = {
