@@ -6,5 +6,7 @@ for i in $git; do
 	cd "$i/.."
 	echo "$(pwd ..)"
 
-	git status -suno
+	git -c color.ui=always fetch | sed 's/^/    /'
+	git -c color.ui=always pull | sed 's/^/    /'
+	git -c color.ui=always status -suno | sed 's/^/    /'
 done
