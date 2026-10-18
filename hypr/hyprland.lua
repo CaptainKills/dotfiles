@@ -310,6 +310,12 @@ hl.window_rule({
 
 -- Application Window Rules
 hl.window_rule({
+	name = "discord-workspace",
+	match = { title = ".*Discord.*" },
+	workspace = "3",
+})
+
+hl.window_rule({
 	name = "spotify-workspace",
 	match = { title = ".*Spotify.*" },
 	workspace = "2",
