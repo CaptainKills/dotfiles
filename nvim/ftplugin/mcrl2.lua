@@ -440,13 +440,43 @@ local function parse()
 		output_append_line("[mCRL2 Error] No active file name for this buffer.")
 		return
 	end
-	run_mcrl2("mcrl22lps", { "-e", active_file }, function(result)
-		if result == "" then
-			output_append_line("[mCRL2] Specification parsed successfully. No errors found.")
+	run_mcrl2(
+		"mcrl22lps",
+		{ "-e", active_file },
+		function(result)
+			local lines = vim.split((result or ""):gsub("\r\n", "\n"):gsub("\r", "\n"), "\n", { plain = true })
+			local warnings = {}
+			for _, line in ipairs(lines) do
+				local trimmed = line:gsub("^%s*(.-)%s*$", "%1")
+				if trimmed:find("^[Ww]arning:") then
+					table.insert(warnings, line)
+				end
+			end
+
+			if result:find("well%-formed") or result == "" then
+				output_append_line("[mCRL2] Specification parsed successfully. No errors found.")
+				if #warnings > 0 then
+					for _, w in ipairs(warnings) do
+						output_append_line(w)
+					end
+					output_show()
+					vim.notify("[mCRL2] Specification parsed with warnings. Check output.", vim.log.levels.WARN)
+				else
+					output_close()
+					vim.notify("[mCRL2] Specification parsed successfully. No errors found.", vim.log.levels.INFO)
+				end
+			else
+				output_append_line(result)
+				output_show()
+				vim.notify("[mCRL2] Specification parsing failed. Check output.", vim.log.levels.ERROR)
+			end
+		end,
+		true,
+		function(err)
+			output_append_line(err)
+			output_show()
 		end
-		output_close()
-		vim.notify("[mCRL2] Specification parsed successfully. No errors found.", vim.log.levels.INFO)
-	end)
+	)
 end
 
 local function show_graph()
@@ -499,16 +529,56 @@ local function simulate()
 	end)
 end
 
-local function verify_next_property(files, success, total, lps_file)
+local function parse_verification_result(result)
+	local lines = vim.split((result or ""):gsub("\r\n", "\n"):gsub("\r", "\n"), "\n", { plain = true })
+	local outcome = nil
+	local outcome_idx = nil
+
+	for i = #lines, 1, -1 do
+		local trimmed = lines[i]:gsub("^%s*(.-)%s*$", "%1")
+		if trimmed == "true" or trimmed == "false" then
+			outcome = trimmed
+			outcome_idx = i
+			break
+		end
+	end
+
+	local extra_lines = {}
+	for i, line in ipairs(lines) do
+		if i ~= outcome_idx then
+			local trimmed = line:gsub("^%s*(.-)%s*$", "%1")
+			if trimmed ~= "" then
+				table.insert(extra_lines, line)
+			end
+		end
+	end
+
+	return outcome, extra_lines
+end
+
+local function verify_next_property(files, success, total, lps_file, warnings_count)
+	warnings_count = warnings_count or 0
 	if #files == 0 then
 		output_append_line("Finished verifying properties.")
 		output_append_line("Successfully verified: " .. success .. "/" .. total)
 		if success == total and total > 0 then
-			output_close()
-			vim.notify(
-				string.format("[mCRL2] Successfully verified all properties (%d/%d).", success, total),
-				vim.log.levels.INFO
-			)
+			if warnings_count > 0 then
+				output_show()
+				vim.notify(
+					string.format(
+						"[mCRL2] Successfully verified all properties (%d/%d), with warnings. Check output.",
+						success,
+						total
+					),
+					vim.log.levels.WARN
+				)
+			else
+				output_close()
+				vim.notify(
+					string.format("[mCRL2] Successfully verified all properties (%d/%d).", success, total),
+					vim.log.levels.INFO
+				)
+			end
 		else
 			output_show()
 			vim.notify(
@@ -527,16 +597,34 @@ local function verify_next_property(files, success, total, lps_file)
 
 	local on_result = function(result)
 		local name = get_relative_path(to_project_path(), head)
-		if result == "true" then
+		local outcome, extra_lines = parse_verification_result(result)
+
+		if #extra_lines > 0 then
+			warnings_count = warnings_count + 1
+		end
+
+		if outcome == "true" then
 			output_append_line("[SUCCEEDED] " .. name)
+			for _, line in ipairs(extra_lines) do
+				output_append_line(line)
+			end
 			success = success + 1
+		elseif outcome == "false" then
+			output_append_line("[FAILED] " .. name)
+			for _, line in ipairs(extra_lines) do
+				output_append_line(line)
+			end
 		else
 			output_append_line("[FAILED] " .. name)
-			if result ~= "false" and result ~= "" then
+			if #extra_lines > 0 then
+				for _, line in ipairs(extra_lines) do
+					output_append_line(line)
+				end
+			elseif result and result ~= "" then
 				output_append_line(result)
 			end
 		end
-		verify_next_property(tail, success, total + 1, lps_file)
+		verify_next_property(tail, success, total + 1, lps_file, warnings_count)
 	end
 
 	run_mcrl2("lps2pbes", { lps_file, "-f", head, "|", create_command("pbes2bool") }, on_result, true, on_result)
@@ -558,7 +646,7 @@ local function verify_properties()
 	end
 
 	mcrl22lps(active_file, function()
-		verify_next_property(files, 0, 0, to_output_file_name(active_file, ".lps"))
+		verify_next_property(files, 0, 0, to_output_file_name(active_file, ".lps"), 0)
 	end)
 end
 

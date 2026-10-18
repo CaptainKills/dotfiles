@@ -433,6 +433,33 @@ local function clean()
 	vim.notify("[mCRL2] Cleaned output directory: " .. out_dir, vim.log.levels.INFO)
 end
 
+local function parse_verification_result(result)
+	local lines = vim.split((result or ""):gsub("\r\n", "\n"):gsub("\r", "\n"), "\n", { plain = true })
+	local outcome = nil
+	local outcome_idx = nil
+
+	for i = #lines, 1, -1 do
+		local trimmed = lines[i]:gsub("^%s*(.-)%s*$", "%1")
+		if trimmed == "true" or trimmed == "false" then
+			outcome = trimmed
+			outcome_idx = i
+			break
+		end
+	end
+
+	local extra_lines = {}
+	for i, line in ipairs(lines) do
+		if i ~= outcome_idx then
+			local trimmed = line:gsub("^%s*(.-)%s*$", "%1")
+			if trimmed ~= "" then
+				table.insert(extra_lines, line)
+			end
+		end
+	end
+
+	return outcome, extra_lines
+end
+
 local function parse()
 	local active_file = vim.api.nvim_buf_get_name(bufnr)
 	if active_file == "" then
@@ -444,18 +471,52 @@ local function parse()
 		mcrl22lps(spec_file, function()
 			local lps_file = to_output_file_name(spec_file, ".lps")
 			local prop_name = get_relative_path(to_project_path(), active_file)
-			run_mcrl2("lps2pbes", { "-e", "-f", active_file, lps_file }, function(result)
-				if result:find("well%-formed") or result == "" then
-					output_append_line("[mCRL2] Property " .. prop_name .. " is well-formed. No errors found.")
-				else
-					output_append_line(result)
+			run_mcrl2(
+				"lps2pbes",
+				{ "-e", "-f", active_file, lps_file },
+				function(result)
+					local lines = vim.split((result or ""):gsub("\r\n", "\n"):gsub("\r", "\n"), "\n", { plain = true })
+					local warnings = {}
+					for _, line in ipairs(lines) do
+						local trimmed = line:gsub("^%s*(.-)%s*$", "%1")
+						if trimmed:find("^[Ww]arning:") then
+							table.insert(warnings, line)
+						end
+					end
+
+					if result:find("well%-formed") or result == "" then
+						output_append_line("[mCRL2] Property " .. prop_name .. " is well-formed. No errors found.")
+						if #warnings > 0 then
+							for _, w in ipairs(warnings) do
+								output_append_line(w)
+							end
+							output_show()
+							vim.notify(
+								string.format("[mCRL2] Property '%s' parsed with warnings. Check output.", prop_name),
+								vim.log.levels.WARN
+							)
+						else
+							output_close()
+							vim.notify(
+								string.format("[mCRL2] Property '%s' parsed successfully. No errors found.", prop_name),
+								vim.log.levels.INFO
+							)
+						end
+					else
+						output_append_line(result)
+						output_show()
+						vim.notify(
+							string.format("[mCRL2] Parsing failed for '%s'. Check output.", prop_name),
+							vim.log.levels.ERROR
+						)
+					end
+				end,
+				true,
+				function(err)
+					output_append_line(err)
+					output_show()
 				end
-				output_close()
-				vim.notify(
-					string.format("[mCRL2] Property '%s' parsed successfully. No errors found.", prop_name),
-					vim.log.levels.INFO
-				)
-			end)
+			)
 		end)
 	end)
 end
@@ -475,14 +536,29 @@ local function verify_property()
 		mcrl22lps(spec_file, function()
 			local lps_file = to_output_file_name(spec_file, ".lps")
 			local on_result = function(result)
-				local lines = vim.split(result:gsub("%s+$", ""), "\n", { plain = true })
-				local last_line = lines[#lines]
-				if last_line == "true" then
+				local outcome, extra_lines = parse_verification_result(result)
+				if outcome == "true" then
 					output_append_line("[SUCCEEDED] " .. prop_name .. " holds.")
-					output_close()
-					vim.notify(string.format("[mCRL2] Property '%s' holds (true).", prop_name), vim.log.levels.INFO)
-				elseif last_line == "false" then
+					if #extra_lines > 0 then
+						for _, line in ipairs(extra_lines) do
+							output_append_line(line)
+						end
+						output_show()
+						vim.notify(
+							string.format("[mCRL2] Property '%s' holds (true), with warnings. Check output.", prop_name),
+							vim.log.levels.WARN
+						)
+					else
+						output_close()
+						vim.notify(string.format("[mCRL2] Property '%s' holds (true).", prop_name), vim.log.levels.INFO)
+					end
+				elseif outcome == "false" then
 					output_append_line("[FAILED] " .. prop_name .. " does not hold.")
+					if #extra_lines > 0 then
+						for _, line in ipairs(extra_lines) do
+							output_append_line(line)
+						end
+					end
 					output_append_line("Run MCRL2ShowTrace (<leader>mt) to view the counterexample trace.")
 					output_show()
 					vim.notify(
@@ -491,7 +567,11 @@ local function verify_property()
 					)
 				else
 					output_append_line("[FAILED] " .. prop_name)
-					if result ~= "" then
+					if #extra_lines > 0 then
+						for _, line in ipairs(extra_lines) do
+							output_append_line(line)
+						end
+					elseif result and result ~= "" then
 						output_append_line(result)
 					end
 					output_show()
@@ -506,9 +586,102 @@ local function verify_property()
 				"lps2pbes",
 				{ lps_file, "-f", active_file, "|", create_command("pbes2bool") },
 				on_result,
-				false,
+				true,
 				on_result
 			)
+		end)
+	end)
+end
+
+local function verify_next_property(files, success, total, lps_file, warnings_count)
+	warnings_count = warnings_count or 0
+	if #files == 0 then
+		output_append_line("Finished verifying properties.")
+		output_append_line("Successfully verified: " .. success .. "/" .. total)
+		if success == total and total > 0 then
+			if warnings_count > 0 then
+				output_show()
+				vim.notify(
+					string.format(
+						"[mCRL2] Successfully verified all properties (%d/%d), with warnings. Check output.",
+						success,
+						total
+					),
+					vim.log.levels.WARN
+				)
+			else
+				output_close()
+				vim.notify(
+					string.format("[mCRL2] Successfully verified all properties (%d/%d).", success, total),
+					vim.log.levels.INFO
+				)
+			end
+		else
+			output_show()
+			vim.notify(
+				string.format("[mCRL2] Property verification: %d/%d passed. Check output.", success, total),
+				vim.log.levels.WARN
+			)
+		end
+		return
+	end
+
+	local head = files[1]
+	local tail = {}
+	for i = 2, #files do
+		table.insert(tail, files[i])
+	end
+
+	local on_result = function(result)
+		local name = get_relative_path(to_project_path(), head)
+		local outcome, extra_lines = parse_verification_result(result)
+
+		if #extra_lines > 0 then
+			warnings_count = warnings_count + 1
+		end
+
+		if outcome == "true" then
+			output_append_line("[SUCCEEDED] " .. name)
+			for _, line in ipairs(extra_lines) do
+				output_append_line(line)
+			end
+			success = success + 1
+		elseif outcome == "false" then
+			output_append_line("[FAILED] " .. name)
+			for _, line in ipairs(extra_lines) do
+				output_append_line(line)
+			end
+		else
+			output_append_line("[FAILED] " .. name)
+			if #extra_lines > 0 then
+				for _, line in ipairs(extra_lines) do
+					output_append_line(line)
+				end
+			elseif result and result ~= "" then
+				output_append_line(result)
+			end
+		end
+		verify_next_property(tail, success, total + 1, lps_file, warnings_count)
+	end
+
+	run_mcrl2("lps2pbes", { lps_file, "-f", head, "|", create_command("pbes2bool") }, on_result, true, on_result)
+end
+
+local function verify_properties()
+	local dir = to_project_path()
+	local files = get_files(dir, ".mcf")
+	if #files == 0 then
+		output_append_line("No .mcf property files found in " .. dir)
+		return
+	end
+
+	get_mcrl2_file(function(spec_file)
+		local spec_name = get_relative_path(dir, spec_file)
+		output_append_line(
+			"Starting property verification for " .. #files .. " properties against " .. spec_name .. ":"
+		)
+		mcrl22lps(spec_file, function()
+			verify_next_property(files, 0, 0, to_output_file_name(spec_file, ".lps"), 0)
 		end)
 	end)
 end
@@ -562,23 +735,42 @@ local function show_trace()
 					"--evidence-file=" .. vim.fn.shellescape(evidence_lps),
 				},
 				function(result)
-					local lines = vim.split(result:gsub("%s+$", ""), "\n", { plain = true })
-					local last_line = lines[#lines]
+					local outcome, extra_lines = parse_verification_result(result)
 
-					if last_line == "true" then
+					if outcome == "true" then
 						output_append_line("\n[mCRL2] Property " .. prop_name .. " holds (true).")
-						output_append_line("No counterexample trace exists.")
-						output_close()
-						vim.notify(
-							string.format("[mCRL2] Property '%s' holds (true). No counterexample trace.", prop_name),
-							vim.log.levels.INFO
-						)
+						if #extra_lines > 0 then
+							for _, line in ipairs(extra_lines) do
+								output_append_line(line)
+							end
+							output_show()
+							vim.notify(
+								string.format(
+									"[mCRL2] Property '%s' holds (true), with warnings. No counterexample trace.",
+									prop_name
+								),
+								vim.log.levels.WARN
+							)
+						else
+							output_append_line("No counterexample trace exists.")
+							output_close()
+							vim.notify(
+								string.format("[mCRL2] Property '%s' holds (true). No counterexample trace.", prop_name),
+								vim.log.levels.INFO
+							)
+						end
 						return
 					end
 
-					if last_line ~= "false" then
+					if outcome ~= "false" then
 						output_append_line("\n[mCRL2 Error] Verification did not return true/false:")
-						output_append_line(result)
+						if #extra_lines > 0 then
+							for _, line in ipairs(extra_lines) do
+								output_append_line(line)
+							end
+						elseif result and result ~= "" then
+							output_append_line(result)
+						end
 						output_show()
 						vim.notify(
 							string.format("[mCRL2] Verification failed for '%s'. Check output.", prop_name),
@@ -588,6 +780,11 @@ local function show_trace()
 					end
 
 					output_append_line("\n[FAILED] " .. prop_name .. " does not hold.")
+					if #extra_lines > 0 then
+						for _, line in ipairs(extra_lines) do
+							output_append_line(line)
+						end
+					end
 					output_append_line("Generating counterexample trace from evidence...")
 
 					run_mcrl2(
@@ -820,6 +1017,12 @@ vim.api.nvim_buf_create_user_command(
 )
 vim.api.nvim_buf_create_user_command(
 	bufnr,
+	"MCRL2VerifyProperties",
+	wrap_command(verify_properties),
+	{ desc = "Verify all MCF properties" }
+)
+vim.api.nvim_buf_create_user_command(
+	bufnr,
 	"MCRL2ShowTrace",
 	wrap_command(show_trace),
 	{ desc = "Show counterexample trace for current property" }
@@ -873,6 +1076,7 @@ vim.b[bufnr].undo_ftplugin = (vim.b[bufnr].undo_ftplugin and (vim.b[bufnr].undo_
 	.. "silent! execute 'nunmap <buffer> <leader>mc' | "
 	.. "silent! delcommand MCRL2VerifyProperty | "
 	.. "silent! delcommand MCRL2Verify | "
+	.. "silent! delcommand MCRL2VerifyProperties | "
 	.. "silent! delcommand MCRL2ShowTrace | "
 	.. "silent! delcommand MCRL2CounterExample | "
 	.. "silent! delcommand MCRL2ShowGraph | "
