@@ -90,4 +90,22 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		ft = { "markdown" },
 	},
+
+	-- NOTE: QMK Formatter
+	{
+		"codethread/qmk.nvim",
+		ft = { "c" },
+		opts = {
+			name = "LAYOUT_split_3x5_2",
+			layout = {
+				"_ x x x x x _ x x x x x",
+				"_ x x x x x _ x x x x x",
+				"_ x x x x x _ x x x x x",
+				"_ _ _ _ x x _ x x _ _ _",
+			},
+			comment_preview = {
+				position = "none",
+			},
+		},
+	},
 }
