@@ -6,7 +6,7 @@ SCRIPTS_DIR="$DOTFILES_DIR/scripts"
 source "$SCRIPTS_DIR/tmux-management.sh"
 
 # Select Project
-project=$(find $PROJECTS_DIR -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | fzf --layout=reverse --height 40% --tmux 40% --bind 'q:abort')
+project=$(find $PROJECTS_DIR -mindepth 1 -maxdepth 1 -type d,l -printf '%f\n' | fzf --layout=reverse --height 40% --tmux 40%)
 fzf_status=$?
 
 if [[ $fzf_status -ne 0 || -z "$project" ]]; then
@@ -14,7 +14,7 @@ if [[ $fzf_status -ne 0 || -z "$project" ]]; then
 fi
 
 # Select Directory
-directory=$(find $PROJECTS_DIR/$project/ -maxdepth 1 -type d | fzf --layout=reverse --height 40% --tmux 40% --bind 'q:abort')
+directory=$(find $PROJECTS_DIR/$project/ -maxdepth 1 -type d,l | fzf --layout=reverse --height 40% --tmux 40%)
 fzf_status=$?
 
 if [[ $fzf_status -ne 0 || -z "$directory" ]]; then
@@ -41,7 +41,7 @@ if [[ "$directory" == *"sshfs"* ]]; then
 
 	ssh_host=${directory##*/}
 
-	directory=$(find $directory -maxdepth 1 -type d | fzf --layout=reverse --height 40% --tmux 40% -q $directory/ --bind 'q:abort')
+	directory=$(find $directory -maxdepth 1 -type d,l | fzf --layout=reverse --height 40% --tmux 40% -q $directory/)
 	fzf_status=$?
 
 	if [[ $fzf_status -ne 0 || -z "$directory" ]]; then
