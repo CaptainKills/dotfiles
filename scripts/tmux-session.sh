@@ -23,9 +23,9 @@ fi
 
 # Create Session Name
 if [[ $directory == */ ]]; then
-	session="$project"
+	session=$(echo "$project" | sed -s "s/\./_/g")
 else
-	session="$project/${directory##*/}"
+	session=$(echo "$project/${directory##*/}" | sed -s "s/\./_/g")
 fi
 
 # Attach to Session if it exists
