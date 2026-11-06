@@ -157,7 +157,7 @@ hl.gesture({
 -- INFO: Keybinds
 -- https://wiki.hypr.land/Configuring/Binds/
 
-local mainMod = "ALT"
+local mainMod = "SUPER"
 
 local flatpak = "flatpak run "
 local browser = flatpak .. "com.brave.Browser"
@@ -180,7 +180,7 @@ hl.bind(mainMod .. " + BRACKETRIGHT", hl.dsp.workspace.move({ monitor = 1 }))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("hyprlauncher"))
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("nautilus"))
-hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("PRINT", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
 hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("grim"))
 
@@ -208,10 +208,10 @@ hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(outlook))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(teams))
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
-hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
