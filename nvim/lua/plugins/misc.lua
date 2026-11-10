@@ -104,7 +104,42 @@ return {
 				"_ _ _ _ x x _ x x _ _ _",
 			},
 			comment_preview = {
-				position = "none",
+				position = "top",
+				keymap_overrides = {
+					-- Left Home Row Mods
+					MOD_A = "a / 󰘳 ",
+					MOD_S = "s /  ",
+					MOD_D = "d / 󰘶 ",
+					MOD_F = "f / 󰘴 ",
+					-- Right Home Row Mods
+					MOD_J = "j / 󰘴 ",
+					MOD_K = "k / 󰘶 ",
+					MOD_L = "l /  ",
+					MOD_SCLN = "; / 󰘳 ",
+					-- Layers
+					LAY_SPC = "󱁐 ",
+					LAY_ESC = "󱊷 ",
+					CW_TOGG = "󰘲 ",
+					LAY_ENT = "󰌑 ",
+					-- Tmux & Hyprland
+					["LCTL(KC_B)"] = "  ",
+					["OSM(MOD_LGUI)"] = "  ",
+					-- Arrow Keys
+					KC_LEFT = " 󰧀 ",
+					KC_DOWN = " 󰦿 ",
+					KC_UP = " 󰧇 ",
+					KC_RIGHT = " 󰧂 ",
+					-- Special Characters
+					KC_TAB = "󰌒 ",
+					KC_BSPC = "󰭜 ",
+					KC_DEL = "󰹿 ",
+					-- No Operation
+					KC_NO = "   ",
+				},
+			},
+			indentation = {
+				enabled = true,
+				width = 4,
 			},
 		},
 	},
