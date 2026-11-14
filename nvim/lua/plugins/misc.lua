@@ -93,7 +93,8 @@ return {
 
 	-- NOTE: QMK Formatter
 	{
-		"codethread/qmk.nvim",
+		-- "codethread/qmk.nvim",
+		dir = "~/Projects/lua/qmk.nvim/",
 		ft = { "c" },
 		opts = {
 			name = "LAYOUT_split_3x5_2",

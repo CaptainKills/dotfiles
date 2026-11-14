@@ -41,25 +41,21 @@ return {
 
 		-- NOTE: Telescope Keymaps
 		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "[S]earch Recent Files ('.' for repeat)" })
-		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-		vim.keymap.set("n", "<leader>st", ":TodoTelescope<CR>", { desc = "[S]earch [T]odo comments" })
+		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Telescope: [S]earch [K]eymaps" })
+		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Telescope: [S]earch [F]iles" })
+		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Telescope: [S]earch by [G]rep" })
+		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Telescope: [S]earch [D]iagnostics" })
+		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "Telescope: Find Existing Buffers" })
+		vim.keymap.set("n", "<leader>st", ":TodoTelescope<CR>", { desc = "Telescope: [S]earch [T]odo comments" })
 
 		-- NOTE: Shortcut for searching your Neovim configuration files
 		vim.keymap.set("n", "<leader>sn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
-		end, { desc = "[S]earch [N]eovim files" })
+		end, { desc = "Telescope: [S]earch [N]eovim files" })
 
 		-- NOTE: Telescope Git Keymaps
-		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Search [G]it [S]tatus" })
-		vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Search [G]it [C]ommits" })
-		vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Search [G]it [B]ranches" })
+		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Telescope: Search [G]it [S]tatus" })
+		vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Telescope: Search [G]it [C]ommits" })
+		vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Telescope: Search [G]it [B]ranches" })
 	end,
 }

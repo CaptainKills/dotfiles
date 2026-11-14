@@ -10,9 +10,6 @@ vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Go to next [D]iagnostic message" })
 
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
 -- Window Management
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
@@ -20,8 +17,6 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Tab Management
-vim.keymap.set("n", "<Tab>", ":bnext<CR>", { desc = "Go to next buffer" })
-vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { desc = "Go to previous buffer" })
 vim.keymap.set("n", "<C-t>o", ":tabnew<CR>")
 vim.keymap.set("n", "<C-t>c", ":tabclose<CR>")
 vim.keymap.set("n", "<C-t>n", ":tabn<CR>")

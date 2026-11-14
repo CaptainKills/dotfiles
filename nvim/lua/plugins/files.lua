@@ -7,12 +7,6 @@ return {
 		opts = {
 			constrain_cursor = "name",
 
-			float = {
-				max_width = 0.75,
-				max_height = 0.75,
-				preview_split = "right",
-			},
-
 			view_options = {
 				show_hidden = true,
 
@@ -27,7 +21,11 @@ return {
 			oil.setup(opts)
 
 			vim.keymap.set("n", "<leader>e", function()
-				oil.toggle_float(nil, { preview = {} })
+				if vim.o.filetype == "oil" then
+					oil.close()
+				else
+					oil.open(nil, { preview = { split = "belowright" } })
+				end
 			end, { desc = "Oil: Open working directory" })
 		end,
 	},
