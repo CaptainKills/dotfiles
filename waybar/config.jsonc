@@ -15,6 +15,7 @@
   "modules-right": [
     "bluetooth",
     "custom/vpn",
+    "custom/monitors",
     "network",
     "pulseaudio",
     "backlight",
@@ -132,6 +133,13 @@
     },
     "tooltip": false
   },
+  "custom/monitors": {
+    "format": "󰍹  {}",
+    "interval": 5,
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/monitor-status.sh",
+    "on-click": "$HOME/.config/waybar/scripts/monitor-toggle.sh",
+  },
   "custom/vpn": {
     "format": "{icon} ",
     "format-icons": {
@@ -142,8 +150,7 @@
     },
     "interval": 5,
     "return-type": "json",
-    "exec": "$HOME/.config/waybar/nm-status.sh",
-    "on-click": "$HOME/.config/waybar/nm-toggle.sh",
-    "signal": 8
+    "exec": "$HOME/.config/waybar/scripts/nm-status.sh",
+    "on-click": "$HOME/.config/waybar/scripts/nm-toggle.sh",
   }
 }

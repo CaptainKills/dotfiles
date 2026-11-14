@@ -1,18 +1,18 @@
 -- INFO: Workspace Rules
 
-local monitor_laptop = "eDP-1"
-local monitor_desk = "desc:Dell Inc. DELL P2418D MY3ND0120JTT"
+local monitor_main = "eDP-1"
+local monitor_extended = "desc:Dell Inc. DELL P2418D MY3ND0120JTT"
 
-hl.workspace_rule({ workspace = "1", monitor = monitor_laptop, default = true })
-hl.workspace_rule({ workspace = "2", monitor = monitor_laptop })
-hl.workspace_rule({ workspace = "3", monitor = monitor_laptop })
-hl.workspace_rule({ workspace = "4", monitor = monitor_laptop })
-hl.workspace_rule({ workspace = "5", monitor = monitor_laptop })
-hl.workspace_rule({ workspace = "6", monitor = monitor_desk, default = true })
-hl.workspace_rule({ workspace = "7", monitor = monitor_desk })
-hl.workspace_rule({ workspace = "8", monitor = monitor_desk })
-hl.workspace_rule({ workspace = "9", monitor = monitor_desk })
-hl.workspace_rule({ workspace = "10", monitor = monitor_desk })
+hl.workspace_rule({ workspace = "1", monitor = monitor_main, default = true })
+hl.workspace_rule({ workspace = "2", monitor = monitor_main })
+hl.workspace_rule({ workspace = "3", monitor = monitor_main })
+hl.workspace_rule({ workspace = "4", monitor = monitor_main })
+hl.workspace_rule({ workspace = "5", monitor = monitor_main })
+hl.workspace_rule({ workspace = "6", monitor = monitor_extended, default = true })
+hl.workspace_rule({ workspace = "7", monitor = monitor_extended })
+hl.workspace_rule({ workspace = "8", monitor = monitor_extended })
+hl.workspace_rule({ workspace = "9", monitor = monitor_extended })
+hl.workspace_rule({ workspace = "10", monitor = monitor_extended })
 
 -- INFO: Window Rules
 

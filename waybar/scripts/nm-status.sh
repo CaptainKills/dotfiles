@@ -9,6 +9,7 @@ CONNECTION_NAME="VPN Eindhoven"
 output_status() {
 	local status=$1
 	local tooltip=$2
+
 	# Waybar JSON format: {"text": "", "alt": "status", "class": "status", "tooltip": "..."}
 	echo "{\"text\":\"\",\"alt\":\"${status}\",\"class\":\"${status}\",\"tooltip\":\"${tooltip}\"}"
 }
