@@ -2,7 +2,7 @@
 
 # --- CONFIGURATION ---
 CONFIG_FILE="/home/danick/.config/hypr/conf/workspaces.lua"
-QUERY='local monitor_main = "eDP-1"'
+QUERY="local active = Monitors.HOME"
 # ---------------------
 
 # Output JSON status for Waybar
