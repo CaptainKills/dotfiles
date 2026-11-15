@@ -11,10 +11,7 @@ hl.config({
 			inactive_border = "rgba(595959aa)",
 		},
 
-		-- Set to true to enable resizing windows by clicking and dragging on borders and gaps
 		resize_on_border = false,
-
-		-- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
 		allow_tearing = false,
 
 		layout = "dwindle",
@@ -25,7 +22,6 @@ hl.config({
 		rounding = 10,
 		rounding_power = 2,
 
-		-- Change transparency of focused and unfocused windows
 		active_opacity = 1.0,
 		inactive_opacity = 1.0,
 
@@ -36,7 +32,6 @@ hl.config({
 			color = "rgba(1a1a1aee)",
 		},
 
-		-- https://wiki.hypr.land/Configuring/Variables/#blur
 		blur = {
 			enabled = true,
 			size = 3,
@@ -52,12 +47,8 @@ hl.config({
 
 	-- INFO: Window Layout
 	dwindle = {
-		preserve_split = true, -- You probably want this
-	},
-
-	-- INFO: Master Layout
-	master = {
-		new_status = "master",
+		force_split = 2,
+		preserve_split = true,
 	},
 
 	-- INFO: Misc

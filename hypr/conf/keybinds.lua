@@ -4,12 +4,12 @@ local mainMod = "SUPER"
 
 local flatpak = "flatpak run "
 local browser = flatpak .. "com.brave.Browser"
+local whatsapp = flatpak .. "com.ktechpit.whatsie"
 local spotify = flatpak .. "com.spotify.Client"
 local bitwarden = flatpak .. "com.bitwarden.desktop"
 local discord = flatpak .. "com.discordapp.Discord"
 local teams = flatpak .. "com.github.IsmaelMartinez.teams_for_linux"
 
-local whatsapp = browser .. " https://web.whatsapp.com"
 local notion = browser .. " https://app.notion.com"
 local outlook = browser .. " https://outlook.office.com"
 
